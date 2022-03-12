@@ -1,0 +1,13 @@
+{
+    "Dependencies": [
+        "GlobalObjectId_V1-1-86d5fffd3a892d44a98f54ed88c44347-93214019566545601-0"
+    ],
+    "Components": [
+        {
+            "$type": "Unity.Build.Classic.ClassicBuildProfile, Unity.Build.Classic",
+            "$version": 1,
+            "Platform": "win",
+            "Configuration": 3
+        }
+    ]
+}
