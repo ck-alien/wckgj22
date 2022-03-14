@@ -3,7 +3,7 @@ using FMODUnity;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-public class GameSound : Singleton<GameSound>
+public sealed class GameSound : Singleton<GameSound>
 {
     public const string MasterVolumePrefKey = "master-volume";
     public const string BGMVolumePrefKey = "bgm-volume";
@@ -32,10 +32,10 @@ public class GameSound : Singleton<GameSound>
     private float _cachedSFXVolume;
     private float _cachedUISFXVolume;
 
-    [RuntimeInitializeOnLoadMethod]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void InitInstance()
     {
-        CreateNewSingletonObject();
+        CreateNewSingletonObject("Game Sound");
     }
 
     protected override void Awake()

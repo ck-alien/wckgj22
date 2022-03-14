@@ -40,8 +40,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    protected static T CreateNewSingletonObject()
+    protected static T CreateNewSingletonObject(string name = null)
     {
-        return new GameObject(SingletonName).AddComponent<T>();
+        return new GameObject(name ?? SingletonName).AddComponent<T>();
     }
 }
