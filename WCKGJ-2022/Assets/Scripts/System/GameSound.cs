@@ -44,22 +44,22 @@ public class GameSound : Singleton<GameSound>
         DontDestroyOnLoad(gameObject);
 
         float volume;
-        if (TryGetVCAController("MasterVolume", out _masterVCA))
+        if (TryGetVCAController("Master", out _masterVCA))
         {
             _masterVCA.getVolume(out volume);
             MasterVolume = volume;
         }
-        if (TryGetVCAController("BGMVolume", out _bgmVCA))
+        if (TryGetVCAController("BGM", out _bgmVCA))
         {
             _bgmVCA.getVolume(out volume);
             BGMVolume = volume;
         }
-        if (TryGetVCAController("SFXVolume", out _sfxVCA))
+        if (TryGetVCAController("SFX", out _sfxVCA))
         {
             _sfxVCA.getVolume(out volume);
             SFXVolume = volume;
         }
-        if (TryGetVCAController("UISFXVolume", out _uiSfxVCA))
+        if (TryGetVCAController("UI-SFX", out _uiSfxVCA))
         {
             _uiSfxVCA.getVolume(out volume);
             UISFXVolume = volume;
