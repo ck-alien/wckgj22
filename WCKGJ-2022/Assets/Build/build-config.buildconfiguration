@@ -5,7 +5,7 @@
             "$type": "Unity.Build.Common.GeneralSettings, Unity.Build",
             "ProductName": "WCKGJ-2022",
             "CompanyName": "CKAlien",
-            "Version": "0.1.0.0"
+            "Version": "0.2.0.0"
         },
         {
             "$type": "Unity.Build.Common.SceneList, Unity.Build",
