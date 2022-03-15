@@ -1,23 +1,28 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour, GameInputAction.IPlayerActions
+public class PlayerController : MonoBehaviour
 {
-    private void Start()
-    {
-        GameInput.Actions.Player.SetCallbacks(this);
-    }
+    [field: SerializeField]
+    public float Speed { get; set; } = 3f;
 
-    public void OnFire(InputAction.CallbackContext context)
+    [field: SerializeField]
+    public Vector2 ClampPosition { get; private set; } = new Vector2(3.5f, 4f);
+
+    private Vector2 _direction;
+
+    private void Update()
     {
-        if (context.performed)
-        {
-            Debug.Log("Fire");
-        }
+        var position = transform.position;
+        position += Speed * Time.deltaTime * new Vector3(_direction.x, _direction.y, transform.position.z);
+        position.x = math.clamp(position.x, -ClampPosition.x, ClampPosition.x);
+        position.y = math.clamp(position.y, -ClampPosition.y, ClampPosition.y);
+        transform.position = position;
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log($"Move -> {context.ReadValue<Vector2>()}");
+        _direction = context.ReadValue<Vector2>();
     }
 }
