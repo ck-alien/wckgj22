@@ -3,7 +3,7 @@
     "Components": [
         {
             "$type": "Unity.Build.Common.GeneralSettings, Unity.Build",
-            "ProductName": "WCKGJ-2022",
+            "ProductName": "EarthIsMine",
             "CompanyName": "CKAlien",
             "Version": "0.2.0.0"
         },
