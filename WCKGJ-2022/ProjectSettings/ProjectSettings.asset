@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: CKAlien
-  productName: WCKGJ-2022
+  productName: EarthIsMine
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
@@ -153,7 +153,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.CKAlien.WCKGJ-2022
+    Standalone: com.CKAlien.EarthIsMine
   buildNumber:
     Standalone: 0
     iPhone: 0
