@@ -14,7 +14,7 @@
             "SceneInfos": [
                 {
                     "Scene": "GlobalObjectId_V1-1-8c9cfa26abfee488c85f1582747f6a02-102900000-0",
-                    "AutoLoad": false
+                    "AutoLoad": true
                 }
             ]
         }
