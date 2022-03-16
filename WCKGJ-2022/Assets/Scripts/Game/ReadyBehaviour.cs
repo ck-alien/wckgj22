@@ -8,12 +8,12 @@ namespace EarthIsMine.Game
     {
         public override IEnumerator OnEnter(IStateMachine stateMachine)
         {
-            yield return UniTask.Delay(1000).ToCoroutine();
+            yield return UniTask.Delay(500).ToCoroutine();
         }
 
         public override IEnumerator OnExecute(IStateMachine stateMachine)
         {
-            yield return UniTask.Delay(3000).ToCoroutine();
+            yield return UniTask.Delay(500).ToCoroutine();
 
             stateMachine.ChangeState(typeof(StageBehaviour));
             yield break;
@@ -21,7 +21,7 @@ namespace EarthIsMine.Game
 
         public override IEnumerator OnExit(IStateMachine stateMachine)
         {
-            yield return UniTask.Delay(1000).ToCoroutine();
+            yield return UniTask.Delay(500).ToCoroutine();
         }
     }
 }

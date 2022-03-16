@@ -54,6 +54,7 @@ namespace EarthIsMine.FSM
 
             _currentStateName = _nextScheduledState.GetType().Name;
             _currentBehaviourStateName = CurrentBehaviourState.ToString();
+
             StartCoroutine(Run());
         }
 
@@ -75,13 +76,13 @@ namespace EarthIsMine.FSM
                 var state = CurrentState;
 
                 ChangeBehaviourState(BehaviourStates.Enter);
-                yield return StartCoroutine(state.OnEnter(this));
+                yield return state.OnEnter(this);
 
                 ChangeBehaviourState(BehaviourStates.Execute);
-                yield return StartCoroutine(state.OnExecute(this));
+                yield return state.OnExecute(this);
 
                 ChangeBehaviourState(BehaviourStates.Exit);
-                yield return StartCoroutine(state.OnExit(this));
+                yield return state.OnExit(this);
             }
 
             void ChangeState(StateBehaviour state)
