@@ -9,12 +9,7 @@ namespace EarthIsMine.Game
 {
     public class StageBehaviour : StateBehaviour
     {
-        private Unity.Mathematics.Random _random;
-
-        private void Start()
-        {
-            _random = new Unity.Mathematics.Random((uint)Random.Range(0, 1000000));
-        }
+        private int _idx = 0;
 
         public override IEnumerator OnEnter(IStateMachine stateMachine)
         {
@@ -23,10 +18,8 @@ namespace EarthIsMine.Game
 
         public override IEnumerator OnExecute(IStateMachine stateMachine)
         {
-            var randomIdx = _random.NextInt(3);
             Enemy spawnedEnemy;
-
-            using var enemyType = randomIdx switch
+            using var enemyType = _idx switch
             {
                 0 => EnemyManager.Instance.SpawnEnemy<EnemyTypeA>(out spawnedEnemy),
                 1 => EnemyManager.Instance.SpawnEnemy<EnemyTypeB>(out spawnedEnemy),
@@ -45,6 +38,7 @@ namespace EarthIsMine.Game
                 yield return null;
             }
 
+            _idx = _idx < 2 ? _idx + 1 : 0;
             stateMachine.ChangeState(typeof(ReadyBehaviour));
             yield break;
         }
