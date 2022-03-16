@@ -18,7 +18,7 @@ namespace EarthIsMine.Object
         }
 
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (tr.position.y < _limitY)
             {
