@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EarthIsMine.Manager;
 
 namespace EarthIsMine.Player
 {
@@ -17,15 +18,11 @@ namespace EarthIsMine.Player
                 tr = GetComponent<Transform>();
             if (controller == null)
                 controller = GetComponent<PlayerController>();
-
         }
 
-
-
-
-        public void MoveOn(float _direction)
+        public void MoveRight(float _direction)
         {
-            tr.position += new Vector3(tr.position.x + _direction, tr.position.y, tr.position.z);
+            tr.position = new Vector3(tr.position.x + (_direction * controller.Speed * Time.deltaTime), tr.position.y, tr.position.z);
         }
 
     }
