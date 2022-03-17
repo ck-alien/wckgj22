@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2548016834806502001}
   - component: {fileID: 2548016834806502002}
+  - component: {fileID: 1191268691347838424}
   - component: {fileID: 385498559622588069}
   m_Layer: 5
   m_Name: GameOver UI Prefab
@@ -46,6 +47,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2548016834806502000}
   m_CullTransparentMesh: 1
+--- !u!225 &1191268691347838424
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2548016834806502000}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &385498559622588069
 MonoBehaviour:
   m_ObjectHideFlags: 0

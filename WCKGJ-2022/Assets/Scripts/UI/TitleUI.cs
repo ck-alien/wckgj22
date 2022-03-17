@@ -1,3 +1,4 @@
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,12 @@ namespace EarthIsMine.UI
 
         private void Start()
         {
+            StartButton.OnClickAsObservable()
+                .Subscribe(_ =>
+                {
+                    CanvasGroup.interactable = false;
+                    SceneLoader.Instance.Load("GameScene");
+                });
         }
     }
 }

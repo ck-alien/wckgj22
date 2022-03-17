@@ -267,6 +267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7575961888649091601}
   - component: {fileID: 7575961888649091822}
+  - component: {fileID: 152568253047731178}
   - component: {fileID: 3300329541249639124}
   - component: {fileID: 2610785209934046250}
   m_Layer: 5
@@ -306,6 +307,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7575961888649091600}
   m_CullTransparentMesh: 1
+--- !u!225 &152568253047731178
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7575961888649091600}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &3300329541249639124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f7a645345f63bf48bc0f12dd2a52ce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startButton: {fileID: 3828444918965798891}
+  <StartButton>k__BackingField: {fileID: 3828444918965798891}
 --- !u!114 &2610785209934046250
 MonoBehaviour:
   m_ObjectHideFlags: 0

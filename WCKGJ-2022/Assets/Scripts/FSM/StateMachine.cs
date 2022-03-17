@@ -65,6 +65,7 @@ namespace EarthIsMine.FSM
             {
                 if (_stateCancellation.IsCancellationRequested)
                 {
+                    _stateCancellation.Dispose();
                     _stateCancellation = new CancellationTokenSource();
                 }
 

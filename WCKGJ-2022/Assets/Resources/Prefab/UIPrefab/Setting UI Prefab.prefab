@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8614238963716610084}
   - component: {fileID: 8614238963716610091}
+  - component: {fileID: 1034419898202963610}
   - component: {fileID: 2680086689978964020}
   m_Layer: 5
   m_Name: Setting UI Prefab
@@ -46,6 +47,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8614238963716610085}
   m_CullTransparentMesh: 1
+--- !u!225 &1034419898202963610
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614238963716610085}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &2680086689978964020
 MonoBehaviour:
   m_ObjectHideFlags: 0

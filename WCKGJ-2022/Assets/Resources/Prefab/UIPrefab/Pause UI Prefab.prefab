@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9098143328099045296}
   - component: {fileID: 9098143328099045299}
+  - component: {fileID: 8752150868426055796}
   - component: {fileID: -1758227104843202773}
   m_Layer: 5
   m_Name: Pause UI Prefab
@@ -46,6 +47,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9098143328099045297}
   m_CullTransparentMesh: 1
+--- !u!225 &8752150868426055796
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9098143328099045297}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &-1758227104843202773
 MonoBehaviour:
   m_ObjectHideFlags: 0
