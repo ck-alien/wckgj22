@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace EarthIsMine
 {
-    public class Projectile<T> : MonoBehaviour
+    public class Projectile : MonoBehaviour
     {
 
+        [SerializeField] protected float _speed;
 
     }
 }
