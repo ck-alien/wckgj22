@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EarthIsMine.Manager;
-
+using EarthIsMine.Object;
 
 namespace EarthIsMine.Player
 {
     public class PlayerAttack : MonoBehaviour
     {
 
-        private GameObject projectile;
+        public ProjectileInfo _info;
 
         [SerializeField] private Transform _startPos;
 
@@ -18,11 +18,6 @@ namespace EarthIsMine.Player
         public float _coolTime;
 
         private float _curCoolTime;
-
-        private void Awake()
-        {
-            projectile = Resources.Load<GameObject>("Prefab/Projectile");
-        }
         private void CoolTimeUpdate()
         {
             if (_curCoolTime > 0)
@@ -32,7 +27,7 @@ namespace EarthIsMine.Player
             else
             {
                 _curCoolTime = _coolTime;
-                ProjectileManager.Instance.CreateProjectiles(projectile, _startPos.position, Quaternion.identity, distance);
+                ProjectileManager.Instance.CreateProjectiles(_info, _startPos.position, Quaternion.identity, distance);
             }
         }
 
