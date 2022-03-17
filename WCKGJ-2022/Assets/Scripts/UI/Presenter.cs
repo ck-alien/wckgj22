@@ -2,18 +2,15 @@ using UnityEngine;
 
 namespace EarthIsMine.UI
 {
-    public class Presenter : MonoBehaviour
+    [RequireComponent(typeof(RectTransform))]
+    public abstract class Presenter : MonoBehaviour
     {
-        // Start is called before the first frame update
-        private void Start()
+        public RectTransform UITransform { get; private set; }
+
+        private void Awake()
         {
-
-        }
-
-        // Update is called once per frame
-        private void Update()
-        {
-
+            UITransform = gameObject.GetComponent<RectTransform>();
+            UITransform.anchoredPosition = Vector2.zero;
         }
     }
 }

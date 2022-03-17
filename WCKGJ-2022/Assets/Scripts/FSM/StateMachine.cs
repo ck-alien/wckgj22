@@ -1,15 +1,15 @@
 using System;
 using System.Collections;
+using System.Threading;
+using UniRx;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace EarthIsMine.FSM
 {
     public interface IStateMachine
     {
         StateBehaviour[] States { get; }
-        StateBehaviour CurrentState { get; }
-        BehaviourStates CurrentBehaviourState { get; }
+        ReactiveProperty<StateBehaviour> CurrentState { get; }
 
         bool ChangeState(Type nextStateType);
     }
@@ -19,23 +19,16 @@ namespace EarthIsMine.FSM
         [field: SerializeField]
         public StateBehaviour[] States { get; private set; }
 
-        [field: SerializeField]
-        public UnityEvent<IStateMachine> OnStateChanged { get; private set; }
-
-        [field: SerializeField]
-        public UnityEvent<IStateMachine> OnBehaviourStateUpdated { get; private set; }
-
         // ONLY DEBUG
 #pragma warning disable IDE0052 // Remove unread private members
         [Header("[DEBUG | ReadOnly]")]
         [SerializeField] private string _currentStateName;
-        [SerializeField] private string _currentBehaviourStateName;
 #pragma warning restore IDE0052
 
-        public StateBehaviour CurrentState { get; private set; }
-        public BehaviourStates CurrentBehaviourState { get; private set; } = BehaviourStates.Enter;
+        public ReactiveProperty<StateBehaviour> CurrentState { get; private set; } = new();
 
         private StateBehaviour _nextScheduledState;
+        private CancellationTokenSource _stateCancellation = new();
 
         protected virtual void Awake()
         {
@@ -43,71 +36,62 @@ namespace EarthIsMine.FSM
             {
                 _nextScheduledState = States[0];
             }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
 
         protected virtual void Start()
         {
-            if (_nextScheduledState is null)
-            {
-                gameObject.SetActive(false);
-            }
+            CurrentState
+                .Where(state => state is not null)
+                .Subscribe(state => _currentStateName = state.GetType().Name);
 
-            _currentStateName = _nextScheduledState.GetType().Name;
-            _currentBehaviourStateName = CurrentBehaviourState.ToString();
-
-            StartCoroutine(Run());
+            Observable
+                .FromMicroCoroutine<StateBehaviour>((observer) => Run(observer))
+                .Subscribe(state => CurrentState.Value = state)
+                .AddTo(gameObject);
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
-            StopAllCoroutines();
+            _stateCancellation?.Cancel();
         }
 
-        private IEnumerator Run()
+        private IEnumerator Run(IObserver<StateBehaviour> observer)
         {
             while (true)
             {
-                if (_nextScheduledState is not null)
+                if (_stateCancellation.IsCancellationRequested)
                 {
-                    ChangeState(_nextScheduledState);
-                    _nextScheduledState = null;
+                    _stateCancellation = new CancellationTokenSource();
                 }
 
-                var state = CurrentState;
+                observer.OnNext(_nextScheduledState);
+                var state = _nextScheduledState;
+                _nextScheduledState = null;
 
-                ChangeBehaviourState(BehaviourStates.Enter);
-                yield return state.OnEnter(this);
+                var stateRunner = Observable.FromMicroCoroutine(() => state.OnEnter(this))
+                    .SelectMany(() => state.OnExecute(this, _stateCancellation.Token))
+                    .SelectMany(() => state.OnExit(this))
+                    .ToYieldInstruction();
 
-                ChangeBehaviourState(BehaviourStates.Execute);
-                yield return state.OnExecute(this);
+                while (!stateRunner.IsDone)
+                {
+                    yield return null;
+                }
 
-                ChangeBehaviourState(BehaviourStates.Exit);
-                yield return state.OnExit(this);
-            }
-
-            void ChangeState(StateBehaviour state)
-            {
-                CurrentState = state;
-                _currentStateName = CurrentState.GetType().Name;
-                OnStateChanged?.Invoke(this);
-            }
-
-            void ChangeBehaviourState(BehaviourStates state)
-            {
-                CurrentBehaviourState = state;
-                _currentBehaviourStateName = CurrentBehaviourState.ToString();
-                OnBehaviourStateUpdated?.Invoke(this);
+                if (_nextScheduledState is null)
+                {
+                    _nextScheduledState = state;
+                }
+                yield return null;
             }
         }
 
         public bool ChangeState(Type nextStateType)
         {
-            if (CurrentBehaviourState is BehaviourStates.Enter or BehaviourStates.Exit)
-            {
-                Debug.LogWarning("ChangeState cannot process in Enter and Exit.");
-                return false;
-            }
-
             if (_nextScheduledState is not null)
             {
                 Debug.LogWarning("Already scheduled next state.");
@@ -122,6 +106,7 @@ namespace EarthIsMine.FSM
             }
 
             _nextScheduledState = nextState;
+            _stateCancellation.Cancel();
             return true;
         }
     }
