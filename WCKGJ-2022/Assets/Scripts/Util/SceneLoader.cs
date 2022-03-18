@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -37,7 +38,8 @@ public sealed class SceneLoader : Singleton<SceneLoader>
 
     private IEnumerator LoadProcess(string sceneName)
     {
-        var openTransition = _transition.Open(Config.TransitionDuration, Config.EaseType)
+        var openTransition = _transition
+            .Open(Config.TransitionDuration, Config.EaseType)
             .ToObservable()
             .ToYieldInstruction();
 
@@ -56,7 +58,8 @@ public sealed class SceneLoader : Singleton<SceneLoader>
         Time.timeScale = 1f;
         yield return null;
 
-        var closeTransition = _transition.Close(Config.TransitionDuration, Config.EaseType)
+        var closeTransition = _transition
+            .Close(Config.TransitionDuration, Config.EaseType)
             .ToObservable()
             .ToYieldInstruction();
 

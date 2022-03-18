@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,7 +29,7 @@ public class SceneTransition : MonoBehaviour
         _background.gameObject.SetActive(false);
     }
 
-    public Task Open(float duraion, Ease ease)
+    public UniTask Open(float duraion, Ease ease)
     {
         return DOTween.Sequence()
             .AppendCallback(() => _start.sizeDelta = Vector2.zero)
@@ -37,10 +37,10 @@ public class SceneTransition : MonoBehaviour
             .Append(_start.DOSizeDelta(_size, duraion).SetEase(ease))
             .AppendCallback(() => _background.gameObject.SetActive(true))
             .AppendCallback(() => _start.gameObject.SetActive(false))
-            .AsyncWaitForCompletion();
+            .ToUniTask();
     }
 
-    public Task Close(float duraion, Ease ease)
+    public UniTask Close(float duraion, Ease ease)
     {
         return DOTween.Sequence()
             .AppendCallback(() => _end.sizeDelta = Vector2.zero)
@@ -48,6 +48,6 @@ public class SceneTransition : MonoBehaviour
             .AppendCallback(() => _background.gameObject.SetActive(false))
             .Append(_end.DOSizeDelta(_size, duraion).SetEase(ease))
             .AppendCallback(() => _end.gameObject.SetActive(false))
-            .AsyncWaitForCompletion();
+            .ToUniTask();
     }
 }
