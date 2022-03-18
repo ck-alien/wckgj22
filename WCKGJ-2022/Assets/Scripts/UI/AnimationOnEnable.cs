@@ -85,10 +85,12 @@ namespace EarthIsMine.UI
 
             DOTween.Sequence()
                 .SetLink(info.Target.gameObject, LinkBehaviour.KillOnDisable)
+                .AppendCallback(() => group.interactable = false)
                 .AppendInterval(info.WaitTime)
                 .Append(transform.DOAnchorPos(info.DefaultPosition, info.Duration).SetEase(info.EaseType))
                 .Join(transform.DOScale(ToVector3Scale(info.DefaultScale), info.Duration).SetEase(info.EaseType))
-                .Join(group.DOFade(1f, info.Duration).SetEase(info.EaseType));
+                .Join(group.DOFade(1f, info.Duration).SetEase(info.EaseType))
+                .AppendCallback(() => group.interactable = true);
 
             static Vector3 ToVector3Scale(Vector2 scale) => new(scale.x, 1, scale.y);
         }

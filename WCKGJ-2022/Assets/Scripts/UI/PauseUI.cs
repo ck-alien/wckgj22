@@ -32,9 +32,9 @@ namespace EarthIsMine.UI
         [SerializeField]
         private Slider _uiSfxVolumeSlider;
 
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
+            base.Awake();
 
             GameManager.Instance.IsPaused.Subscribe(isPaused => gameObject.SetActive(isPaused));
 

@@ -20,9 +20,9 @@ namespace EarthIsMine.UI
 
         private readonly Queue<GameObject> _life = new();
 
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
+            base.Awake();
 
             SetLifeBar(3);
             _scoreText.text = FormatScoreText(1243423535);

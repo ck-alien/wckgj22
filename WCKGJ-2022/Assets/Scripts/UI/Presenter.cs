@@ -17,11 +17,12 @@ namespace EarthIsMine.UI
             UITransform.anchoredPosition = Vector2.zero;
 
             CanvasGroup = gameObject.GetComponent<CanvasGroup>();
+
+            gameObject.SetActive(IsDefault);
         }
 
         protected virtual void Start()
         {
-            gameObject.SetActive(IsDefault);
         }
     }
 }
