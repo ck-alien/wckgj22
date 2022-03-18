@@ -2,18 +2,27 @@ using UnityEngine;
 
 namespace EarthIsMine.UI
 {
-    public class Presenter : MonoBehaviour
+    [RequireComponent(typeof(RectTransform), typeof(CanvasGroup))]
+    public abstract class Presenter : MonoBehaviour
     {
-        // Start is called before the first frame update
-        private void Start()
-        {
+        [field: SerializeField]
+        public bool IsDefault { get; private set; }
 
+        public RectTransform UITransform { get; private set; }
+        public CanvasGroup CanvasGroup { get; private set; }
+
+        protected virtual void Awake()
+        {
+            UITransform = gameObject.GetComponent<RectTransform>();
+            UITransform.anchoredPosition = Vector2.zero;
+
+            CanvasGroup = gameObject.GetComponent<CanvasGroup>();
+
+            gameObject.SetActive(IsDefault);
         }
 
-        // Update is called once per frame
-        private void Update()
+        protected virtual void Start()
         {
-
         }
     }
 }

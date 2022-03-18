@@ -17,7 +17,7 @@ MonoBehaviour:
     logBehaviour: 2
     nestedTweenFailureBehaviour: 0
   timeScale: 1
-  useSmoothDeltaTime: 0
+  useSmoothDeltaTime: 1
   maxSmoothUnscaledTime: 0.15
   rewindCallbackMode: 0
   showUnityEditorReport: 0
@@ -26,12 +26,12 @@ MonoBehaviour:
   defaultRecyclable: 0
   defaultAutoPlay: 3
   defaultUpdateType: 0
-  defaultTimeScaleIndependent: 0
+  defaultTimeScaleIndependent: 1
   defaultEaseType: 6
   defaultEaseOvershootOrAmplitude: 1.70158
   defaultEasePeriod: 0
   defaultAutoKill: 1
-  defaultLoopType: 0
+  defaultLoopType: 2
   debugMode: 0
   debugStoreTargetId: 1
   showPreviewPanel: 1
