@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerProjectile
   m_EditorClassIdentifier: 
   resource: {fileID: 694203783061611893, guid: 869bd8d4f47f3c14cbb48c306a9685b6, type: 3}
-  _limit: 40
+  _limit: 100

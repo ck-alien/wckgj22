@@ -9,6 +9,13 @@ namespace EarthIsMine.Object
     public class PlayerProjectile : Projectile
     {
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.GetComponent<Enemy>())
+            {
+                Debug.Log("you hit enemy!");
+            }
+        }
 
 
         protected override IEnumerator DurableTimeUpdate()
