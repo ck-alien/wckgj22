@@ -494,15 +494,15 @@ MonoBehaviour:
     <DoFade>k__BackingField: 1
     <StartPosition>k__BackingField: {x: 0, y: -30}
     <StartScale>k__BackingField: {x: 1, y: 1}
-    <WaitTime>k__BackingField: 0.8
-    <Duration>k__BackingField: 0.8
+    <WaitTime>k__BackingField: 0.4
+    <Duration>k__BackingField: 0.5
     <EaseType>k__BackingField: 24
   - <Target>k__BackingField: {fileID: 6068782312760435690}
     <DoFade>k__BackingField: 1
     <StartPosition>k__BackingField: {x: 30, y: 0}
     <StartScale>k__BackingField: {x: 1, y: 1}
-    <WaitTime>k__BackingField: 0.9
-    <Duration>k__BackingField: 0.8
+    <WaitTime>k__BackingField: 0.5
+    <Duration>k__BackingField: 0.5
     <EaseType>k__BackingField: 24
 --- !u!1 &7798584840173814048
 GameObject:
