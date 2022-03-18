@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10b560f84da73e7468ccd2e452651c3e, type: 3}
   m_Name: PlayerProjectile
   m_EditorClassIdentifier: 
+  _projectiles: []
+  _poolingOn: []
+  _poolingOff: []
   resource: {fileID: 694203783061611893, guid: 869bd8d4f47f3c14cbb48c306a9685b6, type: 3}
-  _limit: 100
+  _limit: 50

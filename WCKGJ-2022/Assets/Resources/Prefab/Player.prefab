@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8295806584940757805}
   - component: {fileID: 5887222676340545033}
   - component: {fileID: 6533616610547837664}
+  - component: {fileID: 4417693025737450600}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -164,6 +165,20 @@ MonoBehaviour:
   _startPos: {fileID: 2693798188782053832}
   distance: 0.25
   _coolTime: 3
+--- !u!114 &4417693025737450600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4182384885158356481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b10e538cadd14145bbf0c0ba18ad001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _invincibleTime: 2
+  _spriteCount: 4
 --- !u!1 &4239918432259795168
 GameObject:
   m_ObjectHideFlags: 0

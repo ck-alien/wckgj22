@@ -8,13 +8,21 @@ namespace EarthIsMine.Object
     [CreateAssetMenu(fileName = "ProjectileInfo", menuName = "ScriptableObj/ProjectileInfo")]
     public class ProjectileInfo : ScriptableObject
     {
+
+
+
+        public void Reset()
+        {
+            _projectiles.Clear();
+            _poolingOn.Clear();
+            _poolingOff.Clear();
+        }
+        public List<Projectile> _projectiles = new List<Projectile>();
+        public List<Projectile> _poolingOn = new List<Projectile>();
+
+        public List<Projectile> _poolingOff = new List<Projectile>();
         public GameObject resource;
         public int _limit;
-
-        public Queue<Projectile> _projectiles = new Queue<Projectile>();
-        public Queue<Projectile> _poolingOn = new Queue<Projectile>();
-
-        public Queue<Projectile> _poolingOff = new Queue<Projectile>();
 
     }
 }

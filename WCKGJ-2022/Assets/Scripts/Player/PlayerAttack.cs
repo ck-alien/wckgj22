@@ -11,6 +11,11 @@ namespace EarthIsMine.Player
 
         public ProjectileInfo _info;
 
+        private void Start()
+        {
+            _info.Reset();
+        }
+
         [SerializeField] private Transform _startPos;
 
         [SerializeField] private float distance;

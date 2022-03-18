@@ -14,6 +14,8 @@ namespace EarthIsMine.Object
             if (other.GetComponent<Enemy>())
             {
                 Debug.Log("you hit enemy!");
+                ProjectileManager.Instance.PoolingOff(this);
+                StopAllCoroutines();
             }
         }
 
@@ -21,7 +23,7 @@ namespace EarthIsMine.Object
         protected override IEnumerator DurableTimeUpdate()
         {
             yield return new WaitForSeconds(_durableTime);
-            ProjectileManager.Instance.Pooling(this, false);
+            ProjectileManager.Instance.PoolingOff(this);
             yield return null;
         }
 
