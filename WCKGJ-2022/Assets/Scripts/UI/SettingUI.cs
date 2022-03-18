@@ -81,17 +81,19 @@ namespace EarthIsMine.UI
             Array.Copy(Screen.resolutions, _resolutions, Screen.resolutions.Length);
 
             var options = new List<TMP_Dropdown.OptionData>();
-            var curRes = Screen.currentResolution;
+
+            var width = Screen.width;
+            var height = Screen.height;
 
             var idx = 0;
             for (int i = 0; i < _resolutions.Length; i++)
             {
                 var resolution = _resolutions[i];
-                options.Add(new TMP_Dropdown.OptionData($"{resolution.width}x{resolution.height}@{resolution.refreshRate}"));
+                options.Add(new TMP_Dropdown.OptionData($"{resolution.width}x{resolution.height}"));
 
-                if (resolution.width == curRes.width && resolution.height == curRes.height && resolution.refreshRate == curRes.refreshRate)
+                if (resolution.width == width && resolution.height == height)
                 {
-                    Debug.Log($"{i}: {resolution.width}x{resolution.height}@{resolution.refreshRate}");
+                    Debug.Log($"{i}: {resolution.width}x{resolution.height}");
                     idx = i;
                 }
             }
