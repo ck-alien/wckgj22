@@ -6,10 +6,10 @@ namespace EarthIsMine.Player
 {
     public class PlayerDamaged : MonoBehaviour
     {
+        [SerializeField] private float _invincibleTime;
+        [SerializeField] private int _spriteCount;
         private SpriteRenderer _spriteRenderer;
-        public float _invincibleTime;
 
-        public int _spriteCount;
         private bool _invincible;
         private void Awake()
         {
@@ -32,18 +32,19 @@ namespace EarthIsMine.Player
             yield return null;
         }
 
-        private IEnumerator FaidOutInCoroutine()
+        private IEnumerator FaidOutInCoroutine()// 캐릭터가 공격당할시 깜빡거리는 효과
         {
             float time = 0;
-            float start = 1; float end = 0;
+            float start = 1;
+            float end = 0;
             Color _fadeColor = _spriteRenderer.color;
             int count = 0;
             while (count < _spriteCount * 2)
             {
+                yield return null;
                 time += Time.deltaTime / ((_invincibleTime / _spriteCount) / 2);
                 _fadeColor.a = Mathf.Lerp(start, end, time);
                 _spriteRenderer.color = _fadeColor;
-                yield return null;
                 if (_spriteRenderer.color.a == end)
                 {
                     start = start + end;
