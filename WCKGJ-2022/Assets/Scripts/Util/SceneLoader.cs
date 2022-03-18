@@ -53,6 +53,7 @@ public sealed class SceneLoader : Singleton<SceneLoader>
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        Time.timeScale = 1f;
         yield return null;
 
         var closeTransition = _transition.Close(Config.TransitionDuration, Config.EaseType)

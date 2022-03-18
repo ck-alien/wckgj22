@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SceneLoaderConfig
   m_EditorClassIdentifier: 
   <LoadingUIPrefab>k__BackingField: {fileID: 6922753706925546532, guid: e98e8844542f5c247ae38d6abc9f9c6f, type: 3}
-  <Delay>k__BackingField: 1
+  <Delay>k__BackingField: 0
   <TransitionDuration>k__BackingField: 0.7
   <EaseType>k__BackingField: 13

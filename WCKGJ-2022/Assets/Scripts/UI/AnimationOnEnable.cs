@@ -72,6 +72,11 @@ namespace EarthIsMine.UI
         private static void Animate(in AnimationInfo<RectTransform> info)
         {
             var transform = info.Target;
+            if (!transform.gameObject.activeInHierarchy)
+            {
+                return;
+            }
+
             var group = transform.gameObject.GetComponent<CanvasGroup>();
 
             transform.anchoredPosition = info.DefaultPosition + info.StartPosition;

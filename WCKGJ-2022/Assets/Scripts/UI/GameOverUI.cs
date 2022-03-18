@@ -14,9 +14,9 @@ namespace EarthIsMine.UI
         [SerializeField]
         private Button _closeButton;
 
-        private void Start()
+        protected override void Start()
         {
-
+            base.Start();
         }
     }
 }
