@@ -8,9 +8,11 @@ namespace EarthIsMine.Object
     {
         private Transform tr;
 
-        public Vector3 _startPos;
+        [field: SerializeField]
+        private Vector3 _startPos;
 
-        public float _limitY;
+        [field: SerializeField]
+        private float _limitY;
 
         private void Awake()
         {
