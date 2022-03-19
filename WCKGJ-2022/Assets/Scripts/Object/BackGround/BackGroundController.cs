@@ -27,7 +27,10 @@ namespace EarthIsMine.Object
 
         public void ChangeSprite(Day time)
         {
-
+            for (int i = 0; i < parts.Length; i++)
+            {
+                parts[i].ChangeSprite(time);
+            }
         }
 
 
