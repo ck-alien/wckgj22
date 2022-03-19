@@ -24,26 +24,19 @@ namespace EarthIsMine.Game
 
         public override IEnumerator OnExecute(IStateMachine stateMachine, CancellationToken cancellation)
         {
-#pragma warning disable IDE0018 // Inline variable declaration
-            Enemy spawnedEnemy;
-#pragma warning restore IDE0018 // Inline variable declaration
-            using var enemyType = _idx switch
+            Enemy enemy = _idx switch
             {
-                0 => EnemyManager.Instance.SpawnEnemy<EnemyTypeA>(out spawnedEnemy),
-                1 => EnemyManager.Instance.SpawnEnemy<EnemyTypeB>(out spawnedEnemy),
-                2 => EnemyManager.Instance.SpawnEnemy<EnemyTypeC>(out spawnedEnemy),
-                _ => EnemyManager.Instance.SpawnEnemy<EnemyTypeA>(out spawnedEnemy),
+                0 => EnemyManager.Instance.Spawn<EnemyTypeA>(new Vector3(0f, 3f, 0f)),
+                1 => EnemyManager.Instance.Spawn<EnemyTypeB>(new Vector3(0f, 3f, 0f)),
+                2 => EnemyManager.Instance.Spawn<EnemyTypeC>(new Vector3(0f, 3f, 0f)),
+                _ => EnemyManager.Instance.Spawn<EnemyTypeA>(new Vector3(0f, 3f, 0f)),
             };
             _idx = _idx < 2 ? _idx + 1 : 0;
 
-            spawnedEnemy.transform.position = new Vector2(0f, 3f);
-
-            while (!cancellation.IsCancellationRequested && spawnedEnemy.transform.position.y > -3f)
+            var time = 0f;
+            while (!cancellation.IsCancellationRequested && time <= 1f)
             {
-                var pos = spawnedEnemy.transform.position;
-                pos.y -= 3f * Time.deltaTime;
-                spawnedEnemy.transform.position = pos;
-
+                time += Time.deltaTime;
                 yield return null;
             }
 

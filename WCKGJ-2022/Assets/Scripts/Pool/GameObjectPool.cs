@@ -3,33 +3,33 @@ using UnityEngine.Pool;
 
 namespace EarthIsMine.Pool
 {
-    public class GameObjectPool<T> where T : MonoBehaviour
+    public interface IGameObjectPool : IObjectPool<GameObject>
     {
-        public static IObjectPool<T> Create(T prefab)
+    }
+
+    public class GameObjectPool : ObjectPool<GameObject>, IGameObjectPool
+    {
+        public GameObjectPool(GameObject prefab)
+            : base(() => CreateNewPoolItem(prefab), OnTakeFromPool, OnReturnToPool, OnDestroyItem) { }
+
+        private static GameObject CreateNewPoolItem(GameObject prefab)
         {
-            return new ObjectPool<T>(
-                () => CreateNewPoolItem(prefab.gameObject), OnTakeFromPool, OnReturnToPool, OnDestroyItem);
+            return UnityEngine.Object.Instantiate(prefab);
         }
 
-        private static T CreateNewPoolItem(GameObject prefab)
+        private static void OnTakeFromPool(GameObject item)
         {
-            var newObject = UnityEngine.Object.Instantiate(prefab);
-            return newObject.GetComponent<T>();
+            item.SetActive(true);
         }
 
-        private static void OnTakeFromPool(T item)
+        private static void OnReturnToPool(GameObject item)
         {
-            item.gameObject.SetActive(true);
+            item.SetActive(false);
         }
 
-        private static void OnReturnToPool(T item)
+        private static void OnDestroyItem(GameObject item)
         {
-            item.gameObject.SetActive(false);
-        }
-
-        private static void OnDestroyItem(T item)
-        {
-            UnityEngine.Object.Destroy(item.gameObject);
+            UnityEngine.Object.Destroy(item);
         }
     }
 }

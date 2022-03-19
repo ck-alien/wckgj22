@@ -17,8 +17,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         if (Instance == null)
         {
             Instance = gameObject.GetComponent<T>();
-            if (Instance != null)
-                Debug.Log(gameObject.name);
         }
         else
         {

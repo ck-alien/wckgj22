@@ -265,6 +265,14 @@ dotnet_naming_symbols.non_private_readonly_fields.required_modifiers = readonly
 
 dotnet_naming_style.non_private_readonly_field_style.capitalization = pascal_case
 
+# Non-private fields are PascalCase
+dotnet_naming_rule.non_private_fields_should_be_pascal_case.severity = suggestion
+dotnet_naming_rule.non_private_fields_should_be_pascal_case.symbols = non_private_instance_fields
+
+dotnet_naming_symbols.non_private_instance_fields.applicable_kinds = field
+dotnet_naming_symbols.non_private_instance_fields.applicable_accessibilities = public, protected, internal, protected_internal, private_protected
+dotnet_naming_symbols.non_private_instance_fields.capitalization = pascal_case
+
 # Constants are PascalCase
 dotnet_naming_rule.constants_should_be_pascal_case.severity = suggestion
 dotnet_naming_rule.constants_should_be_pascal_case.symbols = constants
@@ -292,7 +300,7 @@ dotnet_naming_rule.instance_fields_should_be_camel_case.symbols = instance_field
 dotnet_naming_rule.instance_fields_should_be_camel_case.style = instance_field_style
 
 dotnet_naming_symbols.instance_fields.applicable_kinds = field
-
+dotnet_naming_symbols.instance_fields.applicable_accessibilities = private
 dotnet_naming_style.instance_field_style.capitalization = camel_case
 dotnet_naming_style.instance_field_style.required_prefix = _
 

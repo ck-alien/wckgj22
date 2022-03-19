@@ -2,6 +2,9 @@ namespace EarthIsMine.Object
 {
     public interface IEnemy
     {
-        void OnUpdate();
+        public int Life { get; set; }
+        public bool IsDestroied { get; set; }
+
+        public void Kill();
     }
 }

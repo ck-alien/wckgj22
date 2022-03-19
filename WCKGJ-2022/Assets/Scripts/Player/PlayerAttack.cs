@@ -47,7 +47,7 @@ namespace EarthIsMine.Player
             else
             {
                 _curCoolTime = _coolTime;
-                ProjectileManager.Instance.CreateProjectiles(_info, _startPos.position, Quaternion.identity, _distance);
+                ProjectileManager.Instance.CreateProjectile(_info, _startPos.position, Quaternion.identity);
             }
         }
 
