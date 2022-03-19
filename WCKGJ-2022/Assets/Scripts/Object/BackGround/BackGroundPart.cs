@@ -8,15 +8,50 @@ namespace EarthIsMine.Object
     {
         private Transform tr;
 
-        [field: SerializeField]
-        private Vector3 _startPos;
+        [SerializeField] private Vector3 _startPos;
 
-        [field: SerializeField]
-        private float _limitY;
+        [SerializeField] private float _limitY;
+
+
+        [SerializeField] private SpriteRenderer[] _sprites;
+
+        SpriteRenderer currentSprite;
 
         private void Awake()
         {
             tr = GetComponent<Transform>();
+            _sprites = GetComponentsInChildren<SpriteRenderer>();
+            currentSprite = _sprites[0];
+        }
+
+        public void ChangeSprite(Day currentTime)
+        {
+            StartCoroutine(ChangeSpriteCoroutine((int)currentTime));
+        }
+
+
+        private IEnumerator ChangeSpriteCoroutine(int index)
+        {
+            Color nextSprite = _sprites[index].color;
+            nextSprite.a = 1;
+            float time = 0;
+            _sprites[index].color = nextSprite;
+            while (true)
+            {
+                yield return null;
+                Color tmp = currentSprite.color;
+                time += Time.deltaTime;
+                tmp.a = Mathf.Lerp(1, 0, time);
+                currentSprite.color = tmp;
+                if (currentSprite.color.a == 0)
+                {
+                    break;
+                }
+            }
+
+            currentSprite = _sprites[index];
+
+            yield return null;
         }
 
         private void Update()
@@ -26,6 +61,8 @@ namespace EarthIsMine.Object
                 tr.position = _startPos;
             }
         }
+
+
 
     }
 }

@@ -348,7 +348,7 @@ MonoBehaviour:
   sourceProjectPath: ../sound/wckgj22-sounds.fspro
   sourceBankPath: ../sound/Build
   SourceBankPathUnformatted: 
-  BankRefreshCooldown: 5
+  BankRefreshCooldown: 1
   ShowBankRefreshWindow: 1
   AutomaticEventLoading: 1
   BankLoadType: 0
@@ -357,7 +357,7 @@ MonoBehaviour:
   ImportType: 0
   TargetAssetPath: FMODBanks
   TargetBankFolder: 
-  EventLinkage: 0
+  EventLinkage: 1
   LoggingLevel: 2
   SpeakerModeSettings: []
   SampleRateSettings: []

@@ -28,7 +28,12 @@ namespace EarthIsMine.UI
             _scoreText.text = FormatScoreText(1243423535);
 
             _settingsButton.OnClickAsObservable()
-                .Subscribe(_ => GameManager.Instance.IsPaused.Value = true);
+                .Subscribe(_ =>
+                {
+                    GameManager.Instance.IsPaused.Value = true;
+                    instance.setVolume(EarthIsMine.System.GameSound.UISFXVolume);
+                    instance.start();
+                });
         }
 
         private void SetLifeBar(int maxLife)
