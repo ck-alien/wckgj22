@@ -1149,6 +1149,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &958734256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4182384885158356481, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
+  m_PrefabInstance: {fileID: 4182384883787286607}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &958734258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958734256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -202116059
+      Data2: 1184980021
+      Data3: -1043741549
+      Data4: -1011734397
+    Path: event:/PlayShotSound
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1025101615
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,6 +1849,10 @@ PrefabInstance:
     - target: {fileID: 4182384885158356511, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533616610547837664, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
+      propertyPath: _coolTime
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}

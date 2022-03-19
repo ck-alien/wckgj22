@@ -2,6 +2,8 @@ using EarthIsMine.Manager;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using FMODUnity;
+
 
 namespace EarthIsMine.UI
 {
@@ -21,10 +23,17 @@ namespace EarthIsMine.UI
             {
                 CanvasGroup.interactable = false;
                 SceneLoader.Instance.Load("GameScene");
+                instance.setVolume(EarthIsMine.System.GameSound.UISFXVolume);
+                instance.start();
             });
 
             _settingButton.OnClickAsObservable()
-                .Subscribe(_ => UIManager.Instance.Show<SettingUI>());
+                .Subscribe(_ =>
+                {
+                    UIManager.Instance.Show<SettingUI>();
+                    instance.setVolume(EarthIsMine.System.GameSound.UISFXVolume);
+                    instance.start();
+                });
         }
     }
 }

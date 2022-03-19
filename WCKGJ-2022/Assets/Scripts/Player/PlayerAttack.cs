@@ -30,9 +30,13 @@ namespace EarthIsMine.Player
         /// </summary>
         private float _curCoolTime;
 
+        private FMOD.Studio.EventInstance instance;
+
         private void Start()
         {
             _info.Reset();
+            _curCoolTime = _coolTime;
+            instance = FMODUnity.RuntimeManager.CreateInstance("event:/PlayShotSound");
         }
 
         /// <summary>
@@ -48,6 +52,9 @@ namespace EarthIsMine.Player
             {
                 _curCoolTime = _coolTime;
                 ProjectileManager.Instance.CreateProjectile(_info, _startPos.position, Quaternion.identity);
+                instance.setVolume(EarthIsMine.System.GameSound.SFXVolume);
+                instance.start();
+
             }
         }
 
