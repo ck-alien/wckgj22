@@ -9,3 +9,4 @@ namespace EarthIsMine.Data
         public EnemyPatternData[] Waves { get; private set; }
     }
 }
+

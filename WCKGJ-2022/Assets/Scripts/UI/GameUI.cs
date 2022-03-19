@@ -20,6 +20,7 @@ namespace EarthIsMine.UI
 
         private readonly Queue<GameObject> _life = new();
 
+
         protected override void Awake()
         {
             base.Awake();

@@ -13,6 +13,7 @@ namespace EarthIsMine.Object
             get => _life;
             set
             {
+                Debug.Log(_life);
                 _life = Mathf.Max(0, value);
                 if (_life == 0)
                 {
