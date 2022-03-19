@@ -18,7 +18,7 @@ namespace EarthIsMine.UI
             UITransform = gameObject.GetComponent<RectTransform>();
             UITransform.anchoredPosition = Vector2.zero;
 
-            instance = FMODUnity.RuntimeManager.CreateInstance("event:/UiClick");
+            instance = FMODUnity.RuntimeManager.CreateInstance("event:/ClickUISFX");
 
 
             CanvasGroup = gameObject.GetComponent<CanvasGroup>();

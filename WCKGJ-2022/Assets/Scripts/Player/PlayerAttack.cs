@@ -36,7 +36,7 @@ namespace EarthIsMine.Player
         {
             _info.Reset();
             _curCoolTime = _coolTime;
-            instance = FMODUnity.RuntimeManager.CreateInstance("event:/PlayShotSound");
+            instance = FMODUnity.RuntimeManager.CreateInstance("event:/ShotSFX2D");
         }
 
         /// <summary>
