@@ -19,7 +19,6 @@ namespace EarthIsMine.Object
             tr = GetComponent<Transform>();
         }
 
-
         private void Update()
         {
             if (tr.position.y < _limitY)
