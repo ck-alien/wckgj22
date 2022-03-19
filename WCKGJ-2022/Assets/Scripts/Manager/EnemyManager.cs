@@ -106,6 +106,17 @@ namespace EarthIsMine.Manager
 
         private void Update()
         {
+            /*
+             * [update]
+             * collision check
+             * [late update]
+             * remove objects
+             * move objects
+             * 
+             * Enemy와 Projectile의 경우
+             * collision check 및 move objects 모두 각자 매니저에서 진행, 이후 삭제는 LateUpdate에서 진행
+             */
+
             var activeProjectiles = ProjectileManager.Instance.ProjectileInfo._poolingOn;
             var playerBounds = GameManager.Instance.Player.GetComponent<BoxCollider2D>().bounds;
 
@@ -140,7 +151,6 @@ namespace EarthIsMine.Manager
                         break;
 
                     case EnemyCollsionCheckJob.JobResults.CollideWithProjectile:
-                        print(1);
                         enemy.Life -= 1;
                         break;
 
@@ -155,19 +165,15 @@ namespace EarthIsMine.Manager
 
         private void LateUpdate()
         {
-            _activeEnemies.ForEach(enemy =>
-            {
-                if (enemy.IsDestroied)
-                {
-                    KillEnemy(enemy);
-                }
-            });
-
             using var transforms = new TransformAccessArray(_activeEnemies.Count);
 
+            // 삭제는 마지막에 모두 모아서 진행
             foreach (var enemy in _activeEnemies)
             {
-                transforms.Add(enemy.transform);
+                if (!enemy.IsDestroied)
+                {
+                    transforms.Add(enemy.transform);
+                }
             }
 
             var job = new EnemyMoveJob
@@ -181,7 +187,7 @@ namespace EarthIsMine.Manager
 
             _activeEnemies.ForEach(enemy =>
             {
-                if (enemy.transform.position.y <= _destroyPositionY)
+                if (enemy.IsDestroied || enemy.transform.position.y <= _destroyPositionY)
                 {
                     KillEnemy(enemy);
                 }
