@@ -266,7 +266,6 @@ GameObject:
   m_Component:
   - component: {fileID: 377309152}
   - component: {fileID: 377309153}
-  - component: {fileID: 377309154}
   m_Layer: 0
   m_Name: Enemy Manager
   m_TagString: Untagged
@@ -301,22 +300,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1de5d5f2b5cc2a4d85b2801dc772178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &377309154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377309151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1716dd0b13ee07c4eba487c48c94774c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _poolingPrefabs:
+  _enemyPrefabs:
   - {fileID: 1990922530532619007, guid: 4e35300f60cd06a45b0f38135674b222, type: 3}
   - {fileID: 8004870554855791028, guid: 925f01cb80d3f694ca0272114f64aeb2, type: 3}
   - {fileID: 4154136630509920680, guid: 055da7ce5781141478efc4209bf082ee, type: 3}
+  _destroyPositionY: -5
+  <MoveSpeed>k__BackingField: 2
 --- !u!1 &418854495
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +317,7 @@ GameObject:
   - component: {fileID: 418854497}
   - component: {fileID: 418854496}
   m_Layer: 0
-  m_Name: ProjectileManager
+  m_Name: Projectile Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -346,6 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2cf4c802b8a5043b589259c74083e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ProjectileInfo>k__BackingField: {fileID: 11400000, guid: 4be9a51fb6f92184c8c68e1b8f926169, type: 2}
 --- !u!4 &418854497
 Transform:
   m_ObjectHideFlags: 0
@@ -1247,7 +1237,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231410461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1727.9403, y: 379.29092, z: -14.170776}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1471,7 +1461,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558828062}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1727.9403, y: 379.29092, z: -14.170776}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1508,6 +1498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948e77415946946449c27f3687c3555e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Player>k__BackingField: {fileID: 4182384883787286608}
 --- !u!4 &1961685642
 Transform:
   m_ObjectHideFlags: 0
@@ -1777,11 +1768,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4182384885158356511, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 4182384885158356511, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -4.04
       objectReference: {fileID: 0}
     - target: {fileID: 4182384885158356511, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1815,5 +1806,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6533616610547837664, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
+      propertyPath: _coolTime
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
+--- !u!114 &4182384883787286608 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8295806584940757805, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
+  m_PrefabInstance: {fileID: 4182384883787286607}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b24806407f3d94bb72a30cc261f656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

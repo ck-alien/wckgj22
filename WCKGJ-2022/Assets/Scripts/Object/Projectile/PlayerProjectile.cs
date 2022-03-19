@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using EarthIsMine.Manager;
+using UnityEngine;
 
 
 namespace EarthIsMine.Object
@@ -9,6 +8,7 @@ namespace EarthIsMine.Object
     public class PlayerProjectile : Projectile
     {
 
+        /*
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.GetComponent<Enemy>())
@@ -18,7 +18,7 @@ namespace EarthIsMine.Object
                 StopAllCoroutines();
             }
         }
-
+        */
 
         protected override IEnumerator DurableTimeUpdate()
         {

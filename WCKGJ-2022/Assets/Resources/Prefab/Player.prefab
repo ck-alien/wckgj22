@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4182384885158356511}
   - component: {fileID: 4182384885158356480}
-  - component: {fileID: 8295806584940757805}
+  - component: {fileID: 6794418399790727955}
   - component: {fileID: 5887222676340545033}
+  - component: {fileID: 8295806584940757805}
   - component: {fileID: 6533616610547837664}
   - component: {fileID: 4417693025737450600}
   m_Layer: 0
@@ -89,20 +90,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8295806584940757805
-MonoBehaviour:
+--- !u!61 &6794418399790727955
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4182384885158356481}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25b24806407f3d94bb72a30cc261f656, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 3
-  <ClampPosition>k__BackingField: {x: 3.5, y: 4}
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.44, y: 2.56}
+    newSize: {x: 2.02, y: 2.12}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.44, y: 2.56}
+  m_EdgeRadius: 0
 --- !u!114 &5887222676340545033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,11 +157,29 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 696327c1-e117-4156-a097-a945039e1224
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ece652be-2f78-4d5e-89c5-c8d3e21c47d7
+    m_ActionName: Game/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &8295806584940757805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4182384885158356481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b24806407f3d94bb72a30cc261f656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Speed>k__BackingField: 3
+  <ClampPosition>k__BackingField: {x: 3.5, y: 4}
 --- !u!114 &6533616610547837664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,8 +194,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _info: {fileID: 11400000, guid: 4be9a51fb6f92184c8c68e1b8f926169, type: 2}
   _startPos: {fileID: 2693798188782053832}
-  distance: 0.25
-  _coolTime: 3
+  _distance: 0.1
+  _coolTime: 0.2
 --- !u!114 &4417693025737450600
 MonoBehaviour:
   m_ObjectHideFlags: 0

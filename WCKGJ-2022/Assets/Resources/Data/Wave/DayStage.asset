@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7b56773db60f84ab4decb12aa03745, type: 3}
+  m_Name: DayStage
+  m_EditorClassIdentifier: 
+  <Waves>k__BackingField:
+  - {fileID: 11400000, guid: 5cfa495fe03aaa7429761f836980eb0a, type: 2}
+  - {fileID: 11400000, guid: cb43760e394aa0449b75a3b5ca311e59, type: 2}
+  - {fileID: 11400000, guid: 6afa6f4c96f40464782b66bd38cdb345, type: 2}

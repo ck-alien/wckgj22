@@ -1,39 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using EarthIsMine.Object;
-
-/*
-
-이 클래스는 플레이어 혹은 몬스터가 만들어내는 모든 발사체를 관리하는 Manager 클래스이다.
-
--함수-
-1. CreateProjectile 함수는 만들어내려는 발사체가 1개일때 호출하는 함수로, 만일 만들어내려는 발사체의 수가 한계 이하면 생성,
-아니면 Pooling 시스템을 활용한다.
-
-2. CreateProjectiles 함수는 만들어내려는 발사체가 2개일때 호출하는 함수로, 만일 만들어내려는 발사체의 수가 한계 이하면 생성,
-아니면 Pooling 시스템을 활용한다.
-
-3. void SetActiveObj 함수는 풀링시스템을 실행하는 함수이다. 첫번째 인자로 풀링하려는 발사체를,
-두번째는 활성화시킬지, 비활성화시킬지 여부를 결정하는 bool 변수이다.
-
-4. Projectile SetActiveObj 함수는 풀링시스템을 실행하는 함수이다. 첫번째 인자로 풀링하려는 발사체의 info를,
-두번째는 활성화시킬지, 비활성화시킬지 여부를 결정하는 bool 변수이다.(주로 활성화를 목적으로 실행)
-
-5. PoolingOff 함수는 비활성화 시키려는 발사체를 받아 void SetActiveObj 함수를 실행시킨다.
-
-
-*/
-
-
-
-
+using UnityEngine;
 
 namespace EarthIsMine.Manager
 {
+    /// <summary>
+    /// 플레이어 혹은 몬스터가 만들어내는 모든 발사체를 관리하는 Manager 클래스이다.
+    /// </summary>
     public class ProjectileManager : Singleton<ProjectileManager>
     {
+        // TODO: EnemyManager처럼 직접 LinkedList 기반으로 관리 가능하게 변경
 
+        [field: SerializeField]
+        public ProjectileInfo ProjectileInfo { get; private set; }
+
+        /// <summary>
+        /// 만들어내려는 발사체가 1개일때 호출하는 함수로, 
+        /// 만일 만들어내려는 발사체의 수가 한계 이하면 생성, 아니면 Pooling 시스템을 활용한다.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="startPos"></param>
+        /// <param name="quaternion"></param>
         public void CreateProjectile(ProjectileInfo info, Vector3 startPos, Quaternion quaternion)
         {
             Projectile tmp;
@@ -50,6 +36,15 @@ namespace EarthIsMine.Manager
                 tmp.transform.position = startPos;
             }
         }
+
+        /// <summary>
+        /// 만들어내려는 발사체가 2개일때 호출하는 함수로,
+        /// 만일 만들어내려는 발사체의 수가 한계 이하면 생성, 아니면 Pooling 시스템을 활용한다.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="startPos"></param>
+        /// <param name="quaternion"></param>
+        /// <param name="distance"></param>
         public void CreateProjectiles(ProjectileInfo info, Vector3 startPos, Quaternion quaternion, float distance)
         {
             Projectile tmp;
@@ -82,7 +77,11 @@ namespace EarthIsMine.Manager
             }
         }
 
-
+        /// <summary>
+        /// 풀링시스템을 실행하는 함수이다.
+        /// </summary>
+        /// <param name="obj">풀링하려는 발사체</param>
+        /// <param name="value">활성화시킬지, 비활성화시킬지 여부를 결정</param>
         protected void SetActiveObj(Projectile obj, bool value)
         {
             if (value)
@@ -99,6 +98,13 @@ namespace EarthIsMine.Manager
             obj.gameObject.SetActive(value);
 
         }
+
+        /// <summary>
+        /// 풀링시스템을 실행하는 함수이다.
+        /// </summary>
+        /// <param name="info">풀링하려는 발사체 정보</param>
+        /// <param name="value">활성화시킬지, 비활성화시킬지 여부를 결정</param>
+        /// <returns></returns>
         protected Projectile SetActiveObj(ProjectileInfo info, bool value)
         {
             Projectile tmp;
@@ -118,6 +124,11 @@ namespace EarthIsMine.Manager
             tmp.gameObject.SetActive(value);
             return tmp;
         }
+
+        /// <summary>
+        /// 비활성화 시키려는 발사체를 받아 void SetActiveObj 함수를 실행시킨다.
+        /// </summary>
+        /// <param name="obj"></param>
         public void PoolingOff(Projectile obj)
         {
             SetActiveObj(obj, false);

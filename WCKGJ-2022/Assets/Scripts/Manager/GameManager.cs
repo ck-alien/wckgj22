@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using EarthIsMine.Player;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,6 +15,9 @@ namespace EarthIsMine.Manager
 
     public class GameManager : Singleton<GameManager>
     {
+        [field: SerializeField]
+        public PlayerController Player { get; private set; }
+
         public ReactiveProperty<bool> IsPaused { get; set; } = new();
         public ReactiveProperty<bool> IsGameOver { get; private set; } = new();
 
