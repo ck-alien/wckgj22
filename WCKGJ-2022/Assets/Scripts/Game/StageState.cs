@@ -71,6 +71,13 @@ namespace EarthIsMine.Game
                     controllers[i].ChangeSprite(Day.Night);
                 }
             }
+            else
+            {
+                for (int i = 0; i < controllers.Length; i++)
+                {
+                    controllers[i].ChangeSprite(Day.DayTime);
+                }
+            }
 
 
 
