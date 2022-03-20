@@ -45,6 +45,22 @@ namespace EarthIsMine.Manager
                 .FromCoroutine<StageType>((observer) => Run(observer));
         }
 
+        private void OnEnable()
+        {
+            if (GameInput.Instance)
+            {
+                GameInput.Instance.ActionMaps.Game.Pause.performed += OnPause;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (GameInput.Instance)
+            {
+                GameInput.Instance.ActionMaps.Game.Pause.performed -= OnPause;
+            }
+        }
+
         public void OnPause(InputAction.CallbackContext context)
         {
             if (context.performed)
