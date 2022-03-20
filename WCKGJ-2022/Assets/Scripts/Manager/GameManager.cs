@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using EarthIsMine.Player;
+using EarthIsMine.Object;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,12 +16,12 @@ namespace EarthIsMine.Manager
     public class GameManager : Singleton<GameManager>
     {
         [field: SerializeField]
-        public PlayerController Player { get; private set; }
+        public Player Player { get; private set; }
 
         public ReactiveProperty<bool> IsPaused { get; set; } = new();
         public ReactiveProperty<bool> IsGameOver { get; private set; } = new();
 
-        public ReactiveProperty<uint> Score { get; set; } = new();
+        public ReactiveProperty<int> Score { get; set; } = new();
 
         public ReactiveProperty<StageType> CurrentStage { get; private set; }
 
@@ -37,12 +37,28 @@ namespace EarthIsMine.Manager
         private void Start()
         {
             Observable
-                .FromMicroCoroutine<uint>((observer) => AutoScoring(observer))
+                .FromMicroCoroutine<int>((observer) => AutoScoring(observer))
                 .Subscribe(addScore => Score.Value += addScore)
                 .AddTo(gameObject);
 
             Observable
                 .FromCoroutine<StageType>((observer) => Run(observer));
+        }
+
+        private void OnEnable()
+        {
+            if (GameInput.Instance)
+            {
+                GameInput.Instance.ActionMaps.Game.Pause.performed += OnPause;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (GameInput.Instance)
+            {
+                GameInput.Instance.ActionMaps.Game.Pause.performed -= OnPause;
+            }
         }
 
         public void OnPause(InputAction.CallbackContext context)
@@ -53,7 +69,7 @@ namespace EarthIsMine.Manager
             }
         }
 
-        private IEnumerator AutoScoring(IObserver<uint> observer)
+        private IEnumerator AutoScoring(IObserver<int> observer)
         {
             float deltaTime = 0f;
 

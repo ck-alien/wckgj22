@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 4182384885158356511}
   - component: {fileID: 4182384885158356480}
   - component: {fileID: 6794418399790727955}
-  - component: {fileID: 5887222676340545033}
+  - component: {fileID: 4271943629176358565}
   - component: {fileID: 8295806584940757805}
+  - component: {fileID: 6676435383820118451}
   - component: {fileID: 6533616610547837664}
-  - component: {fileID: 4417693025737450600}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -116,7 +116,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.44, y: 2.56}
   m_EdgeRadius: 0
---- !u!114 &5887222676340545033
+--- !u!114 &4271943629176358565
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,47 +125,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4182384885158356481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Script: {fileID: 11500000, guid: 044758c9b7b3d1b48a4e80106053ad02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 3d8c78313c5f81740b93c8a4ea12d029, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8295806584940757805}
-        m_TargetAssemblyTypeName: EarthIsMine.Player.PlayerController, WCKGJ22
-        m_MethodName: OnMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 696327c1-e117-4156-a097-a945039e1224
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ece652be-2f78-4d5e-89c5-c8d3e21c47d7
-    m_ActionName: Game/Pause[/Keyboard/escape]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  _defaultLife: 3
 --- !u!114 &8295806584940757805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +143,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 3
   <ClampPosition>k__BackingField: {x: 3.5, y: 4}
+--- !u!114 &6676435383820118451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4182384885158356481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b10e538cadd14145bbf0c0ba18ad001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _invincibleTime: 0.3
+  _spriteCount: 0
+  _hitSound:
+    Guid:
+      Data1: -742376207
+      Data2: 1238301969
+      Data3: -1178556235
+      Data4: -932120940
+    Path: event:/HitSFX
 --- !u!114 &6533616610547837664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,24 +176,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b27c3230dfe754e9be79cd8dc3333c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _info: {fileID: 11400000, guid: 4be9a51fb6f92184c8c68e1b8f926169, type: 2}
   _startPos: {fileID: 2693798188782053832}
-  _distance: 0.1
-  _coolTime: 0.2
---- !u!114 &4417693025737450600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4182384885158356481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b10e538cadd14145bbf0c0ba18ad001, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _invincibleTime: 2
-  _spriteCount: 4
+  <ProjectileType>k__BackingField: 0
+  <ShotCount>k__BackingField: 1
+  <Interval>k__BackingField: 0.15
 --- !u!1 &4239918432259795168
 GameObject:
   m_ObjectHideFlags: 0

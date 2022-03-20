@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using Unity.Collections;
 
-public static class NativeArrayUtil
+internal static class NativeArrayExtensions
 {
-    public static void Fill<T1, T2>(NativeArray<T2> dest, IReadOnlyCollection<T1> source, Func<T1, T2> selector) where T2 : struct
+    public static void Fill<T1, T2>(this NativeArray<T1> dest, IReadOnlyCollection<T2> source, Func<T2, T1> selector) where T1 : struct
     {
         if (dest.Length < source.Count)
         {

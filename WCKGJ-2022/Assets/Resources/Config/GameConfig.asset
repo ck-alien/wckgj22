@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d69f317cf7f8b142acf944fc1165370, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  <TargetFrameRate>k__BackingField: 60
+  <TargetFrameRate>k__BackingField: 120

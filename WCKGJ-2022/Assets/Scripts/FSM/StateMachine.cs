@@ -83,7 +83,7 @@ namespace EarthIsMine.FSM
                     yield return null;
                 }
 
-                _nextScheduledState ??= state;
+                _nextScheduledState = _nextScheduledState is null ? state : _nextScheduledState;
                 yield return null;
             }
         }

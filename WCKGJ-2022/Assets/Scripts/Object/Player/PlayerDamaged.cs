@@ -1,38 +1,46 @@
 using System.Collections;
+using UniRx;
 using UnityEngine;
 
-namespace EarthIsMine.Player
+namespace EarthIsMine.Object
 {
     public class PlayerDamaged : MonoBehaviour
     {
         [SerializeField] private float _invincibleTime;
         [SerializeField] private int _spriteCount;
+        [SerializeField] private FMODUnity.EventReference _hitSound;
+
         private SpriteRenderer _spriteRenderer;
 
-        private bool _invincible;
+        public bool IsInvincible { get; private set; }
+
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }
-        public void GetDamaged(int damage)
-        {
-            if (!_invincible)
-            {
-                StartCoroutine(DamagedCoroutine());
-            }
-        }
 
+        public void OnHit()
+        {
+            if (IsInvincible)
+            {
+                return;
+            }
+
+            if (!_hitSound.IsNull)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot(_hitSound);
+            }
+
+            Observable.FromMicroCoroutine(() => DamagedCoroutine())
+                .Subscribe()
+                .AddTo(gameObject);
+        }
 
         private IEnumerator DamagedCoroutine()
         {
-            _invincible = true;
-            StartCoroutine(FaidOutInCoroutine());
-            _invincible = false;
-            yield return null;
-        }
+            IsInvincible = true;
 
-        private IEnumerator FaidOutInCoroutine()// 캐릭터가 공격당할시 깜빡거리는 효과
-        {
+            // 캐릭터가 공격당할시 깜빡거리는 효과
             float time = 0;
             float start = 1;
             float end = 0;
@@ -51,10 +59,10 @@ namespace EarthIsMine.Player
                     start -= end;
                     time = 0;
                     count++;
-                    Debug.Log("Change");
                 }
             }
-        }
 
+            IsInvincible = false;
+        }
     }
 }

@@ -1,33 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
 namespace EarthIsMine.Object
 {
-    public class Projectile : MonoBehaviour
+    public interface IProjectile : IJobObject
     {
-        public ProjectileInfo _info;
-        [SerializeField] protected float _speed;
+        public ProjectileTypes Type { get; }
+        public float Speed { get; set; }
 
-        [SerializeField] protected float _durableTime;
+        public void Remove();
+    }
 
-        protected void OnEnable()
+    public abstract class Projectile : MonoBehaviour, IProjectile
+    {
+        public abstract ProjectileTypes Type { get; }
+        public bool IsDestroied { get; set; }
+
+        [field: SerializeField]
+        public float Speed { get; set; }
+
+        public void Remove()
         {
-            StartCoroutine(DurableTimeUpdate());
         }
-
-        private void Update()
-        {
-            transform.Translate(Vector3.up * _speed * Time.deltaTime);
-        }
-
-
-        protected virtual IEnumerator DurableTimeUpdate()
-        {
-            yield return null;
-
-        }
-
     }
 }
