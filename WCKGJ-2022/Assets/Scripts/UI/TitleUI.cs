@@ -2,7 +2,6 @@ using EarthIsMine.Manager;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-using FMODUnity;
 
 
 namespace EarthIsMine.UI
@@ -15,9 +14,9 @@ namespace EarthIsMine.UI
         [SerializeField]
         private Button _settingButton;
 
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
+            base.Awake();
 
             _startButton.OnClickAsObservable().Subscribe(_ =>
             {

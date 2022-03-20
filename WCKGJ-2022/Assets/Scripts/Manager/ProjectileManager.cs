@@ -108,17 +108,12 @@ namespace EarthIsMine.Manager
                 return;
             }
 
-            for (int i = 0; i < count; i++)
-            {
-                var p = GetObjectFromPool<T>();
-                p.transform.position = position;
-            }
-
             if (count == 1)
             {
                 var p = GetObjectFromPool<T>();
                 p.transform.position = position;
             }
+            // count가 2 이상일 때 발사체 생성 로직 구현
         }
 
         private void RemoveProjectile(int idx)

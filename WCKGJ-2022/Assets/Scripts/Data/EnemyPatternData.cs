@@ -5,7 +5,7 @@ using UnityEngine;
 namespace EarthIsMine.Data
 {
     [Serializable]
-    public struct EnemyPatterDataItem
+    public struct EnemyPatternDataItem
     {
         [field: SerializeField]
         public EnemyTypes EnemyType { get; private set; }
@@ -18,6 +18,6 @@ namespace EarthIsMine.Data
     public class EnemyPatternData : ScriptableObject
     {
         [field: SerializeField]
-        public EnemyPatterDataItem[] SpawnPattern { get; private set; }
+        public EnemyPatternDataItem[] SpawnPattern { get; private set; }
     }
 }

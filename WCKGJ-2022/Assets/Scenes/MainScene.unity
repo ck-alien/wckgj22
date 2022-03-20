@@ -495,7 +495,7 @@ GameObject:
   - component: {fileID: 536950492}
   - component: {fileID: 536950491}
   m_Layer: 0
-  m_Name: UiSound
+  m_Name: BGM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

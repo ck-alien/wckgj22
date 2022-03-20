@@ -34,9 +34,9 @@ namespace EarthIsMine.UI
 
         private Resolution[] _resolutions;
 
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
+            base.Awake();
 
             _backButton.OnClickAsObservable()
                 .Subscribe(_ => UIManager.Instance.Show<TitleUI>());

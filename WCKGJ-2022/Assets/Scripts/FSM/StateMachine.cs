@@ -11,6 +11,7 @@ namespace EarthIsMine.FSM
         StateBehaviour[] States { get; }
         ReactiveProperty<StateBehaviour> CurrentState { get; }
 
+        IStateBehaviour GetState(Type stateType);
         bool ChangeState(Type nextStateType);
     }
 
@@ -86,6 +87,11 @@ namespace EarthIsMine.FSM
                 _nextScheduledState = _nextScheduledState is null ? state : _nextScheduledState;
                 yield return null;
             }
+        }
+
+        public IStateBehaviour GetState(Type stateType)
+        {
+            return Array.Find(States, s => s.GetType() == stateType);
         }
 
         public bool ChangeState(Type nextStateType)

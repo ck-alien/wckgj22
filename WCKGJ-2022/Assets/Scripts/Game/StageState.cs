@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using EarthIsMine.Data;
 using EarthIsMine.FSM;
 using EarthIsMine.Manager;
 using EarthIsMine.Object;
@@ -9,13 +11,65 @@ using UnityEngine;
 
 namespace EarthIsMine.Game
 {
+    [Serializable]
+    public class StageInfo
+    {
+        [field: SerializeField]
+        public StageTypes Type { get; private set; }
+
+        [field: SerializeField]
+        public StageWaveData StageData { get; private set; }
+
+        [field: SerializeField]
+        public FMODUnity.EventReference BGM { get; private set; }
+
+        public FMOD.Studio.EventInstance BGMInstance { get; set; }
+    }
+
     public class StageState : StateBehaviour
     {
-        private int _idx = 0;
+        [SerializeField]
+        private StageInfo[] _waves;
+
+        private StageInfo _stage;
+
+        private void Start()
+        {
+            foreach (var wave in _waves)
+            {
+                if (!wave.BGM.IsNull)
+                {
+                    wave.BGMInstance = FMODUnity.RuntimeManager.CreateInstance(wave.BGM);
+                }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var wave in _waves)
+            {
+                if (wave.BGMInstance.isValid())
+                {
+                    wave.BGMInstance.release();
+                    wave.BGMInstance.clearHandle();
+                }
+            }
+        }
 
         public override IEnumerator OnEnter(IStateMachine stateMachine)
         {
-            var wait = UniTask.Delay(500).ToObservable().ToYieldInstruction();
+            var gameStateMachine = stateMachine as GameStateMachine;
+            _stage = Array.Find(_waves, w => w.Type == gameStateMachine.StageType);
+            Debug.Assert(_stage is not null, $"{gameStateMachine.StageType}에 맞는 웨이브 데이터가 없습니다.");
+
+            Debug.Log($"{gameStateMachine.StageType} Stage Start");
+
+            if (_stage.BGMInstance.isValid())
+            {
+                _stage.BGMInstance.start();
+            }
+
+            var wait = UniTask.Delay(1000).ToObservable().ToYieldInstruction();
             while (!wait.IsDone)
             {
                 yield return null;
@@ -24,48 +78,66 @@ namespace EarthIsMine.Game
 
         public override IEnumerator OnExecute(IStateMachine stateMachine, CancellationToken cancellation)
         {
-            switch (_idx)
+            var gameStateMachine = stateMachine as GameStateMachine;
+
+            var waves = _stage.StageData.Waves;
+            foreach (var wave in waves)
             {
-                case 0:
-                    EnemyManager.Instance.Spawn<EnemyTypeA>(new Vector3(0f, 3f, 0f));
-                    break;
-
-                case 1:
-                    EnemyManager.Instance.Spawn<EnemyTypeB>(new Vector3(0f, 3f, 0f));
-                    break;
-
-                case 2:
-                    EnemyManager.Instance.Spawn<EnemyTypeC>(new Vector3(0f, 3f, 0f));
-                    break;
-
-                default:
-                    break;
-            }
-            _idx = _idx < 2 ? _idx + 1 : 0;
-
-            var time = 0f;
-            while (!cancellation.IsCancellationRequested && time <= 1f)
-            {
-                time += Time.deltaTime;
-                yield return null;
+                SpawnEnemies(wave.SpawnPattern);
+                while (EnemyManager.Instance.ActiveObjects.Count > 0)
+                {
+                    yield return null;
+                    if (cancellation.IsCancellationRequested)
+                    {
+                        yield break;
+                    }
+                }
             }
 
-            if (cancellation.IsCancellationRequested)
+            gameStateMachine.StageType = gameStateMachine.StageType switch
             {
-                yield break;
-            }
+                StageTypes.Day => StageTypes.Night,
+                StageTypes.Night => StageTypes.Day,
+                _ => StageTypes.Day
+            };
 
-            stateMachine.ChangeState(typeof(ReadyState));
-            yield break;
+            void SpawnEnemies(EnemyPatternDataItem[] patterns)
+            {
+                var spawnPosition = gameStateMachine.EnemySpawnPosition;
+                var distance = gameStateMachine.EnemySpawnDistance;
+
+                foreach (var spawnInfo in patterns)
+                {
+                    var pos = spawnPosition;
+                    pos.x += distance.x * spawnInfo.RelativePosition.x;
+                    pos.y += distance.y * spawnInfo.RelativePosition.y;
+
+                    switch (spawnInfo.EnemyType)
+                    {
+                        case EnemyTypes.TypeA:
+                            EnemyManager.Instance.Spawn<EnemyTypeA>(pos);
+                            break;
+                        case EnemyTypes.TypeB:
+                            EnemyManager.Instance.Spawn<EnemyTypeB>(pos);
+                            break;
+                        case EnemyTypes.TypeC:
+                            EnemyManager.Instance.Spawn<EnemyTypeC>(pos);
+                            break;
+                        default:
+                            Debug.LogWarning("알 수 없는 적 타입입니다!");
+                            break;
+                    }
+                }
+            }
         }
 
         public override IEnumerator OnExit(IStateMachine stateMachine)
         {
-            var wait = UniTask.Delay(500).ToObservable().ToYieldInstruction();
-            while (!wait.IsDone)
+            if (_stage.BGMInstance.isValid())
             {
-                yield return null;
+                _stage.BGMInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             }
+            yield break;
         }
     }
 }

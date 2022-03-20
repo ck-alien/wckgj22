@@ -1,3 +1,4 @@
+using EarthIsMine.Manager;
 using UniRx;
 using UnityEngine;
 
@@ -28,24 +29,30 @@ namespace EarthIsMine.Object
 
         private void Start()
         {
-            Life.SkipLatestValueOnSubscribe().Subscribe(life =>
-                {
-                    Debug.Log($"PlayerLife: {life}");
-                    if (life > 0)
-                    {
-                        Damaged.OnHit();
-                    }
-                });
+            Life.SkipLatestValueOnSubscribe().Subscribe(life => Debug.Log($"PlayerLife: {life}"));
+
+            GameManager.Instance.IsGameOver
+                .Where(s => s is true)
+                .Subscribe(_ => OnDead());
         }
 
-        public void Hit()
+        public void Hit(bool ignoreInvincible = false)
         {
-            if (Damaged.IsInvincible)
+            if ((!ignoreInvincible && Damaged.IsInvincible) || GameManager.Instance.IsGameOver.Value)
             {
                 return;
             }
 
             Life.Value -= 1;
+            Damaged.OnHit();
+        }
+
+        private void OnDead()
+        {
+            Controller.enabled = false;
+            Attack.enabled = false;
+
+            gameObject.SetActive(false);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using EarthIsMine.Game;
 using EarthIsMine.Object;
 using UniRx;
 using UnityEngine;
@@ -15,6 +16,9 @@ namespace EarthIsMine.Manager
 
     public class GameManager : Singleton<GameManager>
     {
+        [field: SerializeField]
+        public GameStateMachine Game { get; private set; }
+
         [field: SerializeField]
         public Player Player { get; private set; }
 
@@ -41,8 +45,12 @@ namespace EarthIsMine.Manager
                 .Subscribe(addScore => Score.Value += addScore)
                 .AddTo(gameObject);
 
-            Observable
-                .FromCoroutine<StageType>((observer) => Run(observer));
+            Player.Life.Where(life => life < 1).Subscribe(_ =>
+            {
+                print("game over");
+                IsGameOver.Value = true;
+                Game.ChangeState(typeof(DeadState));
+            });
         }
 
         private void OnEnable()
@@ -75,6 +83,11 @@ namespace EarthIsMine.Manager
 
             while (true)
             {
+                if (IsGameOver.Value)
+                {
+                    yield break;
+                }
+
                 deltaTime += Time.deltaTime;
                 if (deltaTime >= 10.0f)
                 {
@@ -84,11 +97,6 @@ namespace EarthIsMine.Manager
                 }
                 yield return null;
             }
-        }
-
-        private IEnumerator Run(IObserver<StageType> observer)
-        {
-            yield break;
         }
     }
 }

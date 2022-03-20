@@ -114,8 +114,13 @@ namespace EarthIsMine.Manager
             for (int i = enemies.Count - 1; i >= 0; i--)
             {
                 var enemy = enemies[i];
-                if (enemy.IsDestroied || enemy.transform.position.y <= _destroyPositionY)
+                if (enemy.IsDestroied)
                 {
+                    KillEnemy(i);
+                }
+                if (enemy.transform.position.y <= _destroyPositionY)
+                {
+                    GameManager.Instance.Player.Hit(ignoreInvincible: true);
                     KillEnemy(i);
                 }
             }
@@ -131,8 +136,9 @@ namespace EarthIsMine.Manager
 
         private void KillEnemy(int idx)
         {
-            print($"kill enemy [{idx}]");
-            ActiveObjects[idx].Kill();
+            var enemy = ActiveObjects[idx];
+            print($"kill enemy {enemy.name}");
+            enemy.Kill();
             ReturnObjectToPoolAt(idx);
         }
     }
