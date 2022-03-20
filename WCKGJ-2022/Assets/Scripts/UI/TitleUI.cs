@@ -17,22 +17,20 @@ namespace EarthIsMine.UI
         protected override void Awake()
         {
             base.Awake();
+        }
+
+        protected override void Start()
+        {
+            base.Start();
 
             _startButton.OnClickAsObservable().Subscribe(_ =>
             {
                 CanvasGroup.interactable = false;
                 SceneLoader.Instance.Load("GameScene");
-                instance.setVolume(EarthIsMine.System.GameSound.UISFXVolume);
-                instance.start();
             });
 
             _settingButton.OnClickAsObservable()
-                .Subscribe(_ =>
-                {
-                    UIManager.Instance.Show<SettingUI>();
-                    instance.setVolume(EarthIsMine.System.GameSound.UISFXVolume);
-                    instance.start();
-                });
+                .Subscribe(_ => UIManager.Instance.Show<SettingUI>());
         }
     }
 }

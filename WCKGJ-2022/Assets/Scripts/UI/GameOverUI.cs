@@ -22,6 +22,11 @@ namespace EarthIsMine.UI
 
             GameManager.Instance.IsGameOver.Where(s => s is true)
                 .Subscribe(_ => UIManager.Instance.Show<GameOverUI>(true));
+        }
+
+        protected override void Start()
+        {
+            base.Start();
 
             _restartButton.OnClickAsObservable()
                 .Subscribe(_ => SceneLoader.Instance.Load("GameScene"));

@@ -37,6 +37,11 @@ namespace EarthIsMine.UI
         protected override void Awake()
         {
             base.Awake();
+        }
+
+        protected override void Start()
+        {
+            base.Start();
 
             _backButton.OnClickAsObservable()
                 .Subscribe(_ => UIManager.Instance.Show<TitleUI>());

@@ -698,6 +698,7 @@ GameObject:
   - component: {fileID: 2826497257872273939}
   - component: {fileID: 7427527046194441114}
   - component: {fileID: 448083808006915110}
+  - component: {fileID: 6301795454790938162}
   m_Layer: 5
   m_Name: Restart Button
   m_TagString: Untagged
@@ -808,6 +809,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6301795454790938162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3487942126496703846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e468de8564646af49b2f1da062534272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sfx:
+    Guid:
+      Data1: -2083872679
+      Data2: 1240697343
+      Data3: -1912732022
+      Data4: -1845499777
+    Path: event:/ClickUISFX
 --- !u!1 &4866022571995701138
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,6 +840,7 @@ GameObject:
   - component: {fileID: 3924177044121311721}
   - component: {fileID: 1528904053524333084}
   - component: {fileID: 4665754721780815443}
+  - component: {fileID: 3744489761008647520}
   m_Layer: 5
   m_Name: Title Button
   m_TagString: Untagged
@@ -930,6 +951,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3744489761008647520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4866022571995701138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e468de8564646af49b2f1da062534272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sfx:
+    Guid:
+      Data1: -2083872679
+      Data2: 1240697343
+      Data3: -1912732022
+      Data4: -1845499777
+    Path: event:/ClickUISFX
 --- !u!1 &5953385700785788281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,6 +1232,7 @@ GameObject:
   - component: {fileID: 5857478972348963661}
   - component: {fileID: 5339195055044864520}
   - component: {fileID: 6647085567037779363}
+  - component: {fileID: 8904701618519707384}
   m_Layer: 5
   m_Name: Shutdown Button
   m_TagString: Untagged
@@ -1302,3 +1343,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8904701618519707384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614345096514451300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e468de8564646af49b2f1da062534272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sfx:
+    Guid:
+      Data1: -2083872679
+      Data2: 1240697343
+      Data3: -1912732022
+      Data4: -1845499777
+    Path: event:/ClickUISFX

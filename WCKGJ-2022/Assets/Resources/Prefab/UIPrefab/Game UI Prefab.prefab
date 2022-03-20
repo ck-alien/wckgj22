@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 6890154564802128620}
   - component: {fileID: 4009422961468408109}
   - component: {fileID: 4514545367840759963}
+  - component: {fileID: 6327596173896999543}
   m_Layer: 5
   m_Name: Settings Button
   m_TagString: Untagged
@@ -210,6 +211,25 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &6327596173896999543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251475053964814810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e468de8564646af49b2f1da062534272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sfx:
+    Guid:
+      Data1: -2083872679
+      Data2: 1240697343
+      Data3: -1912732022
+      Data4: -1845499777
+    Path: event:/ClickUISFX
 --- !u!1 &1737625731037777567
 GameObject:
   m_ObjectHideFlags: 0

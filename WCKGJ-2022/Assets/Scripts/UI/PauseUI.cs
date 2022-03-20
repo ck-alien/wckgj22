@@ -37,30 +37,20 @@ namespace EarthIsMine.UI
             base.Awake();
 
             GameManager.Instance.IsPaused.Subscribe(isPaused => gameObject.SetActive(isPaused));
+        }
+
+        protected override void Start()
+        {
+            base.Start();
 
             _resumeButton.OnClickAsObservable()
-                .Subscribe(_ =>
-                 {
-                     GameManager.Instance.IsPaused.Value = false;
-                     instance.setVolume(EarthIsMine.System.GameSound.UISFXVolume);
-                     instance.start();
-                 });
+                .Subscribe(_ => GameManager.Instance.IsPaused.Value = false);
 
             _restartButton.OnClickAsObservable()
-                .Subscribe(_ =>
-                {
-                    SceneLoader.Instance.Load("GameScene");
-                    instance.setVolume(EarthIsMine.System.GameSound.UISFXVolume);
-                    instance.start();
-                });
+                .Subscribe(_ => SceneLoader.Instance.Load("GameScene"));
 
             _titleButton.OnClickAsObservable()
-                .Subscribe(_ =>
-                {
-                    SceneLoader.Instance.Load("MainScene");
-                    instance.setVolume(EarthIsMine.System.GameSound.UISFXVolume);
-                    instance.start();
-                });
+                .Subscribe(_ => SceneLoader.Instance.Load("MainScene"));
 
             _quitButton.OnClickAsObservable()
                 .Subscribe(_ => Application.Quit());
