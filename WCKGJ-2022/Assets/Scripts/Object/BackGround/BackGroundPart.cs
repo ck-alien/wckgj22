@@ -24,6 +24,23 @@ namespace EarthIsMine.Object
             currentSprite = _sprites[0];
         }
 
+        private void Start()
+        {
+            Default();
+
+        }
+
+        private void Default()
+        {
+            for (int i = 0; i < _sprites.Length; i++)
+            {
+                if (currentSprite != _sprites[i])
+                {
+                    _sprites[i].gameObject.SetActive(false);
+                }
+            }
+        }
+
         public void ChangeSprite(Day currentTime)
         {
             StartCoroutine(ChangeSpriteCoroutine((int)currentTime));
@@ -33,6 +50,7 @@ namespace EarthIsMine.Object
         private IEnumerator ChangeSpriteCoroutine(int index)
         {
             Color nextSprite = _sprites[index].color;
+            _sprites[index].gameObject.SetActive(true);
             nextSprite.a = 1;
             float time = 0;
             _sprites[index].color = nextSprite;
@@ -45,6 +63,8 @@ namespace EarthIsMine.Object
                 currentSprite.color = tmp;
                 if (currentSprite.color.a == 0)
                 {
+                    currentSprite.gameObject.SetActive(false);
+                    currentSprite = _sprites[index];
                     break;
                 }
             }
