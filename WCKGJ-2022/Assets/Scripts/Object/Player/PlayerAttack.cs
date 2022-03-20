@@ -28,7 +28,7 @@ namespace EarthIsMine.Object
             _elapsedTime = 0f;
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             _elapsedTime += Time.deltaTime;
             if (_elapsedTime >= Interval)
