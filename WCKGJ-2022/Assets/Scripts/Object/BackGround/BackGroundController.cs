@@ -31,7 +31,6 @@ namespace EarthIsMine.Object
             }
         }
 
-
         private void Update()
         {
             tr.position += new Vector3(0, Speed, 0) * Time.deltaTime;
