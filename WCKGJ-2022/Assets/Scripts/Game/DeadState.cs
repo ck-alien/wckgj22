@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Threading;
-using Cysharp.Threading.Tasks;
 using EarthIsMine.FSM;
-using UniRx;
+using UnityEngine;
 
 namespace EarthIsMine.Game
 {
@@ -10,17 +9,13 @@ namespace EarthIsMine.Game
     {
         public override IEnumerator OnEnter(IStateMachine stateMachine)
         {
-            var wait = UniTask.Delay(500).ToObservable().ToYieldInstruction();
-            while (!wait.IsDone)
-            {
-                yield return null;
-            }
+            Debug.Log("Enter Dead State");
+            yield break;
         }
 
         public override IEnumerator OnExecute(IStateMachine stateMachine, CancellationToken cancellation)
         {
-            var wait = UniTask.Delay(500).ToObservable().ToYieldInstruction();
-            while (!wait.IsDone)
+            while (!cancellation.IsCancellationRequested)
             {
                 yield return null;
             }
@@ -28,11 +23,7 @@ namespace EarthIsMine.Game
 
         public override IEnumerator OnExit(IStateMachine stateMachine)
         {
-            var wait = UniTask.Delay(500).ToObservable().ToYieldInstruction();
-            while (!wait.IsDone)
-            {
-                yield return null;
-            }
+            yield break;
         }
     }
 }

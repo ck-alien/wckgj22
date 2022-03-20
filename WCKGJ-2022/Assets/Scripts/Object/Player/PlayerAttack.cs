@@ -21,14 +21,11 @@ namespace EarthIsMine.Object
         [field: SerializeField]
         public float Interval { get; set; }
 
-        private FMOD.Studio.EventInstance instance;
-
         private float _elapsedTime;
 
         private void OnEnable()
         {
             _elapsedTime = 0f;
-            instance = FMODUnity.RuntimeManager.CreateInstance("event:/ShotSFX2D");
         }
 
         private void Update()
@@ -40,8 +37,6 @@ namespace EarthIsMine.Object
                 {
                     case ProjectileTypes.Default:
                         ProjectileManager.Instance.Create<PlayerProjectile>(_startPos.position, ShotCount);
-                        instance.setVolume(EarthIsMine.System.GameSound.SFXVolume);
-                        instance.start();
                         break;
 
                     default:

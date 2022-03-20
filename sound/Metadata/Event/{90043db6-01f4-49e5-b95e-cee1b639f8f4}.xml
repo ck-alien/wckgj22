@@ -73,6 +73,9 @@
 		<relationship name="modules">
 			<destination>{794251fd-bd20-421d-b7b4-f1e8ad473e2e}</destination>
 		</relationship>
+		<relationship name="markers">
+			<destination>{3b7f84d7-0a0b-47a0-a945-81cd4d89aa9b}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{44212312-b900-48c9-a417-07466c80cb02}">
 		<relationship name="effectChain">
@@ -111,6 +114,20 @@
 		</relationship>
 		<relationship name="output">
 			<destination>{44212312-b900-48c9-a417-07466c80cb02}</destination>
+		</relationship>
+	</object>
+	<object class="LoopRegion" id="{3b7f84d7-0a0b-47a0-a945-81cd4d89aa9b}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="length">
+			<value>366.0393650793651</value>
+		</property>
+		<relationship name="timeline">
+			<destination>{1c3111e7-af45-4082-979c-8a0ae8a581aa}</destination>
+		</relationship>
+		<relationship name="markerTrack">
+			<destination>{46d94a9e-869f-4104-93fc-5826d4035418}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{da6e2729-8ee3-481e-81be-a8249255c62d}">

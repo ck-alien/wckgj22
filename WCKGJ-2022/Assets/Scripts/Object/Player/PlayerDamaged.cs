@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using UniRx;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace EarthIsMine.Object
 
         private SpriteRenderer _spriteRenderer;
 
-        public bool IsInvincible { get; private set; }
+        public bool IsInvincible { get; set; }
 
         private void Awake()
         {
@@ -30,6 +31,8 @@ namespace EarthIsMine.Object
             {
                 FMODUnity.RuntimeManager.PlayOneShot(_hitSound);
             }
+
+            Camera.main.DOShakePosition(0.2f, strength: 0.5f);
 
             Observable.FromMicroCoroutine(() => DamagedCoroutine())
                 .Subscribe()
