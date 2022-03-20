@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
+using System.Linq;
+using EarthIsMine.Jobs;
 using EarthIsMine.Object;
-using EarthIsMine.Pool;
-using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
@@ -10,99 +8,13 @@ using UnityEngine.Jobs;
 
 namespace EarthIsMine.Manager
 {
-    [BurstCompile]
-    public struct EnemyCollsionCheckJob : IJobParallelFor
+    public class EnemyManager : ObjectManager<EnemyManager, Enemy>
     {
-        public enum JobResults
-        {
-            NotCollide,
-            CollideWithPlayer,
-            CollideWithProjectile
-        }
-
-        [ReadOnly]
-        public NativeArray<Bounds> Enemies;
-
-        [ReadOnly]
-        public NativeArray<Bounds> Projectiles;
-
-        [ReadOnly]
-        public Bounds Player;
-
-        [WriteOnly]
-        public NativeArray<JobResults> Results;
-
-        public void Execute(int index)
-        {
-            var enemy = Enemies[index];
-
-            if (CollisionCheck.IsCollide2D(enemy, Player))
-            {
-                Results[index] = JobResults.CollideWithPlayer;
-                return;
-            }
-
-            foreach (var projectile in Projectiles)
-            {
-                if (CollisionCheck.IsCollide2D(enemy, projectile))
-                {
-                    Results[index] = JobResults.CollideWithProjectile;
-                    return;
-                }
-            }
-
-            Results[index] = JobResults.NotCollide;
-        }
-    }
-
-    [BurstCompile]
-    public struct EnemyMoveJob : IJobParallelForTransform
-    {
-        [ReadOnly]
-        public float DeltaTime;
-
-        [ReadOnly]
-        public float Speed;
-
-        public void Execute(int index, TransformAccess transform)
-        {
-            var position = transform.position;
-            position += DeltaTime * Speed * Vector3.down;
-            transform.position = position;
-        }
-    }
-
-    public class EnemyManager : Singleton<EnemyManager>
-    {
-        [SerializeField]
-        private Enemy[] _enemyPrefabs;
-
         [SerializeField]
         private int _destroyPositionY = -5;
 
         [field: SerializeField]
         public float MoveSpeed { get; set; }
-
-        public IReadOnlyCollection<IEnemy> Enemies => _activeEnemies;
-
-        private readonly Dictionary<Type, GameObject> _poolingPrefabsCache = new();
-        private readonly Dictionary<Type, IGameObjectPool> _pool = new();
-        private readonly LinkedList<Enemy> _activeEnemies = new();
-
-        protected override void Awake()
-        {
-            base.Awake();
-
-            foreach (var enemy in _enemyPrefabs)
-            {
-                var prefab = enemy.gameObject;
-                var enemyType = enemy.GetType();
-                var pool = new GameObjectPool(prefab);
-
-                _poolingPrefabsCache.TryAdd(enemyType, prefab);
-                _pool.TryAdd(enemyType, pool);
-            }
-        }
 
         private void Update()
         {
@@ -117,15 +29,22 @@ namespace EarthIsMine.Manager
              * collision check 및 move objects 모두 각자 매니저에서 진행, 이후 삭제는 LateUpdate에서 진행
              */
 
-            var activeProjectiles = ProjectileManager.Instance.ProjectileInfo._poolingOn;
-            var playerBounds = GameManager.Instance.Player.GetComponent<BoxCollider2D>().bounds;
+            var enemies = ActiveObjects;
+            var projectiles = ProjectileManager.Instance.ActiveObjects;
+            var player = GameManager.Instance.Player;
+            if (enemies.Count == 0)
+            {
+                return;
+            }
 
-            using var enemyBounds = new NativeArray<Bounds>(_activeEnemies.Count, Allocator.TempJob);
-            using var projectileBounds = new NativeArray<Bounds>(activeProjectiles.Count, Allocator.TempJob);
-            using var results = new NativeArray<EnemyCollsionCheckJob.JobResults>(enemyBounds.Length, Allocator.TempJob);
+            using var enemyBounds = new NativeArray<Bounds>(enemies.Count, Allocator.TempJob);
+            using var projectileBounds = new NativeArray<Bounds>(projectiles.Count, Allocator.TempJob);
+            var playerBounds = player.GetComponent<BoxCollider2D>().bounds;
 
-            NativeArrayUtil.Fill(enemyBounds, _activeEnemies, e => e.gameObject.GetComponent<BoxCollider2D>().bounds);
-            NativeArrayUtil.Fill(projectileBounds, activeProjectiles, p => p.gameObject.GetComponent<BoxCollider2D>().bounds);
+            using var output = new NativeArray<EnemyCollsionCheckJob.JobResult>(enemies.Count, Allocator.TempJob);
+
+            enemyBounds.Fill(enemies, e => e.GetComponent<BoxCollider2D>().bounds);
+            projectileBounds.Fill(projectiles, p => p.GetComponent<BoxCollider2D>().bounds);
 
             // 다른 Update에서 Enemy 목록에 접근해야 하기 때문에 체크만 함
             var job = new EnemyCollsionCheckJob
@@ -133,92 +52,88 @@ namespace EarthIsMine.Manager
                 Enemies = enemyBounds,
                 Projectiles = projectileBounds,
                 Player = playerBounds,
-                Results = results
+                Output = output
             };
             var handle = job.Schedule(enemyBounds.Length, 1);
             handle.Complete();
 
-            var enemyNode = _activeEnemies.First;
-            for (int i = 0; i < results.Length; i++)
+            for (int i = 0; i < enemies.Count; i++)
             {
-                var result = results[i];
-                var enemy = enemyNode.Value;
+                var enemy = enemies[i];
+                var result = output[i];
 
-                switch (result)
+                switch (result.Result)
                 {
-                    case EnemyCollsionCheckJob.JobResults.CollideWithPlayer:
+                    case CollisionJobResults.CollideWithPlayer:
+                        player.Hit();
                         enemy.IsDestroied = true;
                         break;
 
-                    case EnemyCollsionCheckJob.JobResults.CollideWithProjectile:
+                    case CollisionJobResults.CollideWithProjectile:
                         enemy.Life -= 1;
+                        var idx = result.OtherIndex;
+                        var other = projectiles[idx];
+                        other.IsDestroied = true;
                         break;
 
-                    case EnemyCollsionCheckJob.JobResults.NotCollide:
                     default:
                         break;
                 }
-
-                enemyNode = enemyNode.Next;
             }
         }
 
         private void LateUpdate()
         {
-            using var transforms = new TransformAccessArray(_activeEnemies.Count);
-
-            // 삭제는 마지막에 모두 모아서 진행
-            foreach (var enemy in _activeEnemies)
+            var enemies = ActiveObjects;
+            if (enemies.Count == 0)
             {
-                if (!enemy.IsDestroied)
-                {
-                    transforms.Add(enemy.transform);
-                }
+                return;
             }
 
-            var job = new EnemyMoveJob
+            var enemiesAlive = enemies.Where(e => !e.IsDestroied).ToArray();
+
+            using var transforms = new TransformAccessArray(enemiesAlive.Length);
+            using var speeds = new NativeArray<float>(enemiesAlive.Length, Allocator.TempJob);
+
+            speeds.Fill(enemiesAlive, e =>
+            {
+                transforms.Add(e.transform);
+                return MoveSpeed;
+            });
+
+            var job = new ObjectMoveJob
             {
                 DeltaTime = Time.deltaTime,
-                Speed = MoveSpeed
+                Speeds = speeds,
+                MoveDirection = Vector3.down
             };
 
             var handle = job.Schedule(transforms);
             handle.Complete();
 
-            _activeEnemies.ForEach(enemy =>
+            for (int i = enemies.Count - 1; i >= 0; i--)
             {
+                var enemy = enemies[i];
                 if (enemy.IsDestroied || enemy.transform.position.y <= _destroyPositionY)
                 {
-                    KillEnemy(enemy);
+                    KillEnemy(i);
                 }
-            });
+            }
         }
 
         public T Spawn<T>(Vector3 position) where T : Enemy
         {
-            var pool = _pool[typeof(T)];
-            var enemy = pool.Get().GetComponent<T>();
-            enemy.IsDestroied = false;
+            var enemy = GetObjectFromPool<T>();
+            enemy.transform.position = position;
 
-            enemy.gameObject.transform.position = position;
-            if (!enemy.gameObject.TryGetComponent<ReturnToPool>(out var returnToPool))
-            {
-                returnToPool = enemy.gameObject.AddComponent<ReturnToPool>();
-            }
-
-            returnToPool.Pool = pool;
-
-            _activeEnemies.AddLast(enemy);
             return enemy;
         }
 
-        private void KillEnemy(Enemy enemy)
+        private void KillEnemy(int idx)
         {
-            enemy.Kill();
-            _activeEnemies.Remove(enemy);
-
-            var pool = _pool[enemy.GetType()];
-            pool.Release(enemy.gameObject);
+            print($"kill enemy [{idx}]");
+            ActiveObjects[idx].Kill();
+            ReturnObjectToPoolAt(idx);
         }
     }
 }

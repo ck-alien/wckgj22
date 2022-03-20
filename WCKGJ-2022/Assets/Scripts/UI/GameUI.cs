@@ -23,17 +23,17 @@ namespace EarthIsMine.UI
         protected override void Awake()
         {
             base.Awake();
+        }
 
-            SetLifeBar(3);
-            _scoreText.text = FormatScoreText(1243423535);
+        protected override void Start()
+        {
+            base.Start();
 
             _settingsButton.OnClickAsObservable()
-                .Subscribe(_ =>
-                {
-                    GameManager.Instance.IsPaused.Value = true;
-                    instance.setVolume(EarthIsMine.System.GameSound.UISFXVolume);
-                    instance.start();
-                });
+                .Subscribe(_ => GameManager.Instance.IsPaused.Value = true);
+
+            GameManager.Instance.Player.Life.Subscribe(life => SetLifeBar(life));
+            GameManager.Instance.Score.Subscribe(score => _scoreText.text = FormatScoreText(score));
         }
 
         private void SetLifeBar(int maxLife)
@@ -56,7 +56,7 @@ namespace EarthIsMine.UI
             }
         }
 
-        private static string FormatScoreText(uint score)
+        private static string FormatScoreText(int score)
         {
             return $"{score:#,0}";
         }

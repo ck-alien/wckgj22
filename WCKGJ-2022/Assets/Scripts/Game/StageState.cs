@@ -24,13 +24,23 @@ namespace EarthIsMine.Game
 
         public override IEnumerator OnExecute(IStateMachine stateMachine, CancellationToken cancellation)
         {
-            Enemy enemy = _idx switch
+            switch (_idx)
             {
-                0 => EnemyManager.Instance.Spawn<EnemyTypeA>(new Vector3(0f, 3f, 0f)),
-                1 => EnemyManager.Instance.Spawn<EnemyTypeB>(new Vector3(0f, 3f, 0f)),
-                2 => EnemyManager.Instance.Spawn<EnemyTypeC>(new Vector3(0f, 3f, 0f)),
-                _ => EnemyManager.Instance.Spawn<EnemyTypeA>(new Vector3(0f, 3f, 0f)),
-            };
+                case 0:
+                    EnemyManager.Instance.Spawn<EnemyTypeA>(new Vector3(0f, 3f, 0f));
+                    break;
+
+                case 1:
+                    EnemyManager.Instance.Spawn<EnemyTypeB>(new Vector3(0f, 3f, 0f));
+                    break;
+
+                case 2:
+                    EnemyManager.Instance.Spawn<EnemyTypeC>(new Vector3(0f, 3f, 0f));
+                    break;
+
+                default:
+                    break;
+            }
             _idx = _idx < 2 ? _idx + 1 : 0;
 
             var time = 0f;

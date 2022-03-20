@@ -124,4 +124,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e812d355882abc14c9007a2bbb0052a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _life: 3
+  _addScore: 10
+  <DefaultLife>k__BackingField: 10

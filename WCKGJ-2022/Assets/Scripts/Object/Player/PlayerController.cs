@@ -2,7 +2,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace EarthIsMine.Player
+namespace EarthIsMine.Object
 {
     public class PlayerController : MonoBehaviour
     {
@@ -14,7 +14,7 @@ namespace EarthIsMine.Player
 
         private Vector2 _direction;
 
-        private void Update()
+        private void LateUpdate()
         {
             var position = transform.position;
             position += Speed * Time.deltaTime * new Vector3(_direction.x, _direction.y, transform.position.z);
