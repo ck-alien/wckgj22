@@ -36,6 +36,14 @@ namespace EarthIsMine.Object
                 .Subscribe(_ => OnDead());
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                Hit();
+            }
+        }
+
         public void Hit(bool ignoreInvincible = false)
         {
             if ((!ignoreInvincible && Damaged.IsInvincible) || GameManager.Instance.IsGameOver.Value)

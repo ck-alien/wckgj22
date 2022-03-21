@@ -301,11 +301,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefabs:
-  - {fileID: 1990922530532619007, guid: 4e35300f60cd06a45b0f38135674b222, type: 3}
-  - {fileID: 8004870554855791028, guid: 925f01cb80d3f694ca0272114f64aeb2, type: 3}
-  - {fileID: 4154136630509920680, guid: 055da7ce5781141478efc4209bf082ee, type: 3}
+  - <Type>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 1990922530532619007, guid: 4e35300f60cd06a45b0f38135674b222, type: 3}
+  - <Type>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 8004870554855791028, guid: 925f01cb80d3f694ca0272114f64aeb2, type: 3}
+  - <Type>k__BackingField: 2
+    <Prefab>k__BackingField: {fileID: 4154136630509920680, guid: 055da7ce5781141478efc4209bf082ee, type: 3}
   _destroyPositionY: -5
-  <MoveSpeed>k__BackingField: 1
 --- !u!1001 &379901603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -501,7 +503,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefabs:
-  - {fileID: 419363679095626636, guid: 869bd8d4f47f3c14cbb48c306a9685b6, type: 3}
+  - <Type>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 419363679095626636, guid: 869bd8d4f47f3c14cbb48c306a9685b6, type: 3}
   _destroyPositionY: 6
 --- !u!4 &418854497
 Transform:
@@ -1979,14 +1982,6 @@ PrefabInstance:
     - target: {fileID: 4182384885158356511, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6533616610547837664, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
-      propertyPath: <Interval>k__BackingField
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 6676435383820118451, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
-      propertyPath: _spriteCount
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}

@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _invincibleTime: 0.3
-  _spriteCount: 0
+  _spriteCount: 1
   _hitSound:
     Guid:
       Data1: -142762116
@@ -179,7 +179,7 @@ MonoBehaviour:
   _startPos: {fileID: 2693798188782053832}
   <ProjectileType>k__BackingField: 0
   <ShotCount>k__BackingField: 1
-  <Interval>k__BackingField: 0.15
+  <Interval>k__BackingField: 0.1
 --- !u!1 &4239918432259795168
 GameObject:
   m_ObjectHideFlags: 0
