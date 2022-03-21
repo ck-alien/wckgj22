@@ -436,8 +436,8 @@
       }
     },
     "com.unity.visualscripting": {
-      "version": "1.7.7",
-      "depth": 0,
+      "version": "1.7.6",
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.ugui": "1.0.0",

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{a5471bce-e03f-48e1-a27d-b1e98b7558ca}">
+		<property name="assetPath">
+			<value>afternoon.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>760.08199546485264</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{03bc4e29-41cd-409d-9e6a-6c3dffb8b2c8}</destination>
+		</relationship>
+	</object>
+</objects>

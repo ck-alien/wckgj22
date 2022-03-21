@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce323564410f1644aacb088fa81a309, type: 3}
+  m_Name: Night_Wave2
+  m_EditorClassIdentifier: 
+  <SpawnPattern>k__BackingField:
+  - <EnemyType>k__BackingField: 0
+    <RelativePosition>k__BackingField: {x: 2, y: 0}
+  - <EnemyType>k__BackingField: 0
+    <RelativePosition>k__BackingField: {x: 1, y: 1}
+  - <EnemyType>k__BackingField: 0
+    <RelativePosition>k__BackingField: {x: 3, y: 1}
+  - <EnemyType>k__BackingField: 0
+    <RelativePosition>k__BackingField: {x: 0.5, y: 2}
+  - <EnemyType>k__BackingField: 0
+    <RelativePosition>k__BackingField: {x: 3.5, y: 2}
+  - <EnemyType>k__BackingField: 0
+    <RelativePosition>k__BackingField: {x: 0, y: 3}
+  - <EnemyType>k__BackingField: 0
+    <RelativePosition>k__BackingField: {x: 1, y: 3}
+  - <EnemyType>k__BackingField: 1
+    <RelativePosition>k__BackingField: {x: 2, y: 3}
+  - <EnemyType>k__BackingField: 0
+    <RelativePosition>k__BackingField: {x: 3, y: 3}
+  - <EnemyType>k__BackingField: 0
+    <RelativePosition>k__BackingField: {x: 4, y: 3}
+  - <EnemyType>k__BackingField: 2
+    <RelativePosition>k__BackingField: {x: 2, y: 5}

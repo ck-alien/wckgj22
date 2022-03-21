@@ -75,10 +75,10 @@ namespace EarthIsMine.System
 
         private void LateUpdate()
         {
-            SetVolume(_masterVCA, ref _cachedMasterVolume, MasterVolume);
-            SetVolume(_bgmVCA, ref _cachedBGMVolume, BGMVolume);
-            SetVolume(_sfxVCA, ref _cachedSFXVolume, SFXVolume);
-            SetVolume(_uiSfxVCA, ref _cachedUISFXVolume, UISFXVolume);
+            SetVolume(_masterVCA, MasterVolumePrefKey, ref _cachedMasterVolume, MasterVolume);
+            SetVolume(_bgmVCA, BGMVolumePrefKey, ref _cachedBGMVolume, BGMVolume);
+            SetVolume(_sfxVCA, SFXVolumePrefKey, ref _cachedSFXVolume, SFXVolume);
+            SetVolume(_uiSfxVCA, UISFXVolumePrefKey, ref _cachedUISFXVolume, UISFXVolume);
         }
 
         private bool TryGetVCAController(string name, out VCA vca)
@@ -96,7 +96,7 @@ namespace EarthIsMine.System
             }
         }
 
-        private void SetVolume(VCA vca, ref float cachedVolume, float newVolume)
+        private void SetVolume(VCA vca, string prefKey, ref float cachedVolume, float newVolume)
         {
             if (!vca.isValid() || newVolume == cachedVolume)
             {
@@ -106,6 +106,7 @@ namespace EarthIsMine.System
             if (vca.setVolume(newVolume) == FMOD.RESULT.OK)
             {
                 cachedVolume = newVolume;
+                PlayerPrefs.SetFloat(prefKey, newVolume);
             }
         }
     }

@@ -1,23 +1,20 @@
 using EarthIsMine.Object;
-using EarthIsMine.Pool;
 using UnityEngine;
-using UnityEngine.Pool;
 
 namespace EarthIsMine.Manager
 {
-    [RequireComponent(typeof(EnemyPool))]
-    public class EnemyManager : Singleton<EnemyManager>
+    public class EnemyManager : ObjectManager<EnemyManager, Enemy, EnemyTypes>
     {
-        private EnemyPool _pool;
+        [SerializeField]
+        private int _destroyPositionY = -5;
 
-        private void Start()
-        {
-            _pool = GetComponent<EnemyPool>();
-        }
+        public int DestroyPositionY => _destroyPositionY;
 
-        public PooledObject<Enemy> SpawnEnemy<T>(out Enemy spawnedEnemy) where T : Enemy
+        public Enemy Spawn(EnemyTypes enemyType, Vector3 position)
         {
-            return _pool[typeof(T)].Get(out spawnedEnemy);
+            var enemy = Pools[enemyType].Take();
+            enemy.transform.position = position;
+            return enemy.GetComponent<Enemy>();
         }
     }
 }
