@@ -53,9 +53,10 @@ namespace EarthIsMine.Object
             {
                 yield return null;
                 time += Time.deltaTime / (_invincibleTime / _spriteCount / 2);
-                fadeColor.a = Mathf.Lerp(start, end, time);
+                fadeColor.g = Mathf.Lerp(start, end, time);
+                fadeColor.b = Mathf.Lerp(start, end, time);
                 _spriteRenderer.color = fadeColor;
-                if (_spriteRenderer.color.a == end)
+                if (_spriteRenderer.color.g == end && _spriteRenderer.color.b == end)
                 {
                     start += end;
                     end = start - end;
