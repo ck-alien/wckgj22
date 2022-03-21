@@ -1768,6 +1768,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4182384885158356480, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4182384885158356480, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4182384885158356480, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4182384885158356481, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1815,6 +1827,10 @@ PrefabInstance:
     - target: {fileID: 4182384885158356511, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6676435383820118451, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
+      propertyPath: _spriteCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e145a2991cfb54e9a8f11647b66d7c, type: 3}
