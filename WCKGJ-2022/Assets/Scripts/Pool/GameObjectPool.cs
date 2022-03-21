@@ -80,9 +80,12 @@ namespace EarthIsMine.Pool
                 Debug.LogWarning($"{guid}와 일치하는 노드를 찾지 못했습니다.");
                 // throw new InvalidOperationException($"{guid}와 일치하는 노드를 찾지 못했습니다.");
             }
+            else
+            {
+                _activeObjects.Remove(node);
+            }
 
             item.SetActive(false);
-            _activeObjects.Remove(node);
             _inactiveObjects.Enqueue(item);
         }
 

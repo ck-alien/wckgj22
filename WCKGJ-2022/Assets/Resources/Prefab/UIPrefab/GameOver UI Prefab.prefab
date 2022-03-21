@@ -365,6 +365,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <IsDefault>k__BackingField: 0
+  _textAnimateInterval: 0.1
+  _resultMessageData: {fileID: 11400000, guid: 3ff203b96a208684b9ffa7a70c27462e, type: 2}
+  _resultText: {fileID: 5743611713056363719}
   _restartButton: {fileID: 448083808006915110}
   _titleButton: {fileID: 4665754721780815443}
   _closeButton: {fileID: 6647085567037779363}
