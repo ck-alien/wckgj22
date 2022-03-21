@@ -1,5 +1,3 @@
-using UnityEngine.SceneManagement;
-
 namespace EarthIsMine.Manager
 {
     public class TitleManager : Singleton<TitleManager>
@@ -7,7 +5,6 @@ namespace EarthIsMine.Manager
         protected override void Awake()
         {
             base.Awake();
-            SceneManager.LoadSceneAsync("BackgroundScene", LoadSceneMode.Additive);
         }
     }
 }

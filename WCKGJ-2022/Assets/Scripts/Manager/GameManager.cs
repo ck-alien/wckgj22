@@ -5,7 +5,6 @@ using EarthIsMine.Object;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 namespace EarthIsMine.Manager
 {
@@ -32,8 +31,6 @@ namespace EarthIsMine.Manager
         protected override void Awake()
         {
             base.Awake();
-            SceneManager.LoadSceneAsync("BackgroundScene", LoadSceneMode.Additive);
-
             IsPaused.Where(isPaused => isPaused is true).Subscribe(_ => Time.timeScale = 0f);
             IsPaused.Where(isPaused => isPaused is false).Subscribe(_ => Time.timeScale = 1f);
         }

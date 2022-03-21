@@ -31,6 +31,9 @@ namespace EarthIsMine.Game
         [SerializeField]
         private StageInfo[] _waves;
 
+        [SerializeField]
+        private BackGroundController[] _backgrounds;
+
         private StageInfo _stage;
 
         private void Start()
@@ -58,7 +61,6 @@ namespace EarthIsMine.Game
 
         public override IEnumerator OnEnter(IStateMachine stateMachine)
         {
-            var controllers = FindObjectsOfType<BackGroundController>();
             var gameStateMachine = stateMachine as GameStateMachine;
             _stage = Array.Find(_waves, w => w.Type == gameStateMachine.StageType);
             Debug.Assert(_stage is not null, $"{gameStateMachine.StageType}에 맞는 웨이브 데이터가 없습니다.");
@@ -66,20 +68,18 @@ namespace EarthIsMine.Game
             Debug.Log($"{gameStateMachine.StageType} Stage Start");
             if (gameStateMachine.StageType == StageTypes.Night)
             {
-                for (int i = 0; i < controllers.Length; i++)
+                for (int i = 0; i < _backgrounds.Length; i++)
                 {
-                    controllers[i].ChangeSprite(Day.Night);
+                    _backgrounds[i].ChangeSprite(Day.Night);
                 }
             }
             else
             {
-                for (int i = 0; i < controllers.Length; i++)
+                for (int i = 0; i < _backgrounds.Length; i++)
                 {
-                    controllers[i].ChangeSprite(Day.DayTime);
+                    _backgrounds[i].ChangeSprite(Day.DayTime);
                 }
             }
-
-
 
             if (_stage.BGMInstance.isValid())
             {
