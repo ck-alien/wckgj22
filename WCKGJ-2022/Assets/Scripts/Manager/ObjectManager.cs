@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using EarthIsMine.Object;
 using EarthIsMine.Pool;
 using UnityEngine;
@@ -27,19 +26,6 @@ namespace EarthIsMine.Manager
 
         protected IDictionary<ItemTypesT, IGameObjectPool> Pools => _pools;
 
-        public ItemT[] AllActiveObjects
-        {
-            get
-            {
-                var list = new List<ItemT>();
-                foreach (var pool in _pools.Values)
-                {
-                    list.AddRange(pool.ActiveObjects.Select(go => go.GetComponent<ItemT>()));
-                }
-                return list.ToArray();
-            }
-        }
-
         public int ActiveObjectsCount
         {
             get
@@ -47,7 +33,7 @@ namespace EarthIsMine.Manager
                 var count = 0;
                 foreach (var item in _pools.Values)
                 {
-                    count += item.ActiveObjects.Count;
+                    count += item.CountActive;
                 }
                 return count;
             }
