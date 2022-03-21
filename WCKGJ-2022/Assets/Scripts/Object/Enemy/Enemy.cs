@@ -1,9 +1,11 @@
+using EarthIsMine.Data;
 using EarthIsMine.Manager;
+using EarthIsMine.Pool;
 using UnityEngine;
 
 namespace EarthIsMine.Object
 {
-    public interface IEnemy : IJobObject
+    public interface IEnemy : IObject
     {
         public EnemyTypes Type { get; }
         public int Life { get; set; }
@@ -11,18 +13,13 @@ namespace EarthIsMine.Object
         public void Kill();
     }
 
-    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(SpriteRenderer), typeof(ObjectMove))]
     public abstract class Enemy : MonoBehaviour, IEnemy
     {
-        [SerializeField]
-        private int _addScore;
+        [field: SerializeField]
+        public EnemyData Data { get; private set; }
 
         public abstract EnemyTypes Type { get; }
-
-        public bool IsDestroied { get; set; }
-
-        [field: SerializeField]
-        public int DefaultLife { get; set; }
 
         public int Life
         {
@@ -33,59 +30,52 @@ namespace EarthIsMine.Object
                 _life = Mathf.Max(0, value);
                 if (_life == 0)
                 {
-                    GameManager.Instance.Score.Value += _addScore;
-                    IsDestroied = true;
-                }
-                else
-                {
-                    _hitAnimCount = 2;
+                    Kill();
+                    GameManager.Instance.Score.Value += Data.Score;
                 }
             }
         }
 
         private int _life;
-        private SpriteRenderer _renderer;
-        private float _time;
-        private int _hitAnimCount;
 
-        protected virtual void Start()
+        private void Start()
         {
-            _renderer = GetComponent<SpriteRenderer>();
+            GetComponent<ObjectMove>().Speed = Data.Speed;
         }
 
         private void OnEnable()
         {
-            Life = DefaultLife;
+            Life = Data.Life;
         }
 
         protected virtual void Update()
         {
-            if (_hitAnimCount > 0)
+            if (transform.position.y <= EnemyManager.Instance.DestroyPositionY)
             {
-                _time += Time.deltaTime;
-                if (_time > 0.1f)
-                {
-                    _renderer.color = _hitAnimCount % 2 == 0 ? Color.red : Color.white;
-                    _hitAnimCount--;
-                }
-                else
-                {
-                    return;
-                }
+                Kill();
+                GameManager.Instance.Player.Hit(ignoreInvincible: true);
             }
-
-            _time = 0f;
         }
 
-        protected virtual void OnDisable()
+        protected virtual void OnTriggerEnter2D(Collider2D other)
         {
-            _renderer.material.color = Color.white;
-            _hitAnimCount = 0;
-            _time = 0f;
+            if (other.CompareTag("Player"))
+            {
+                Kill();
+            }
+            else if (other.CompareTag("Projectile"))
+            {
+                var projectile = other.GetComponent<Projectile>();
+                Life -= projectile.Data.Damage;
+            }
         }
 
         public void Kill()
         {
+            if (gameObject.TryGetComponent<ReturnToPool>(out var component))
+            {
+                component.Return();
+            }
         }
     }
 }

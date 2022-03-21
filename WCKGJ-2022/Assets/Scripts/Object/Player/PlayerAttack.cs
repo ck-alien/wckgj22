@@ -28,20 +28,12 @@ namespace EarthIsMine.Object
             _elapsedTime = 0f;
         }
 
-        private void LateUpdate()
+        private void Update()
         {
             _elapsedTime += Time.deltaTime;
             if (_elapsedTime >= Interval)
             {
-                switch (ProjectileType)
-                {
-                    case ProjectileTypes.Default:
-                        ProjectileManager.Instance.Create<PlayerProjectile>(_startPos.position, ShotCount);
-                        break;
-
-                    default:
-                        break;
-                }
+                ProjectileManager.Instance.Create(ProjectileType, _startPos.position, ShotCount);
                 _elapsedTime = 0f;
             }
         }

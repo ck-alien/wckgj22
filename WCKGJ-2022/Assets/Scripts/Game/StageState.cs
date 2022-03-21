@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using EarthIsMine.Data;
 using EarthIsMine.FSM;
 using EarthIsMine.Manager;
-using EarthIsMine.Object;
 using UniRx;
 using UnityEngine;
 
@@ -84,14 +83,15 @@ namespace EarthIsMine.Game
             foreach (var wave in waves)
             {
                 SpawnEnemies(wave.SpawnPattern);
-                while (EnemyManager.Instance.ActiveObjects.Count > 0)
+
+                do
                 {
                     yield return null;
                     if (cancellation.IsCancellationRequested)
                     {
                         yield break;
                     }
-                }
+                } while (EnemyManager.Instance.ActiveObjectsCount > 0);
             }
 
             gameStateMachine.StageType = gameStateMachine.StageType switch
@@ -112,21 +112,7 @@ namespace EarthIsMine.Game
                     pos.x += distance.x * spawnInfo.RelativePosition.x;
                     pos.y += distance.y * spawnInfo.RelativePosition.y;
 
-                    switch (spawnInfo.EnemyType)
-                    {
-                        case EnemyTypes.TypeA:
-                            EnemyManager.Instance.Spawn<EnemyTypeA>(pos);
-                            break;
-                        case EnemyTypes.TypeB:
-                            EnemyManager.Instance.Spawn<EnemyTypeB>(pos);
-                            break;
-                        case EnemyTypes.TypeC:
-                            EnemyManager.Instance.Spawn<EnemyTypeC>(pos);
-                            break;
-                        default:
-                            Debug.LogWarning("알 수 없는 적 타입입니다!");
-                            break;
-                    }
+                    EnemyManager.Instance.Spawn(spawnInfo.EnemyType, pos);
                 }
             }
         }
