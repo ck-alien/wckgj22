@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407362429c2ae94448adb31472742d77, type: 3}
+  m_Name: ResultMessageData
+  m_EditorClassIdentifier: 
+  <Messages>k__BackingField:
+  - <Score>k__BackingField: 0
+    <Message>k__BackingField: "\uD06C\uD751, \uC6D0\uD1B5\uD558\uB2E4!\r"
+  - <Score>k__BackingField: 1000
+    <Message>k__BackingField: "\uD734, \uC544\uC2AC\uC544\uC2AC\uD588\uC5B4~\r"
+  - <Score>k__BackingField: 2000
+    <Message>k__BackingField: "\uCCC7\u2026! \uB9CC\uB9CC\uCE58 \uC54A\uB124~\r"
+  - <Score>k__BackingField: 3000
+    <Message>k__BackingField: "\uD5E4\uD5F7 \uC774 \uC815\uB3C4\uB294 \uAECC\uC774\uC9C0~\u2665"
+  - <Score>k__BackingField: 4000
+    <Message>k__BackingField: "\uD788\uD79B \uC544\uC774\uC2A4\uD06C\uB9BC\uCC98\uB7FC
+      \uBA39\uC5B4\uC8FC\uACA0\uB2E4~\u2665\r"
+  - <Score>k__BackingField: 5000
+    <Message>k__BackingField: "\uD06C\uD06D, \uC27D\uAD70~ \uC9C0\uAD6C\uB294 \uC774\uC81C
+      \uB0B4\uAF2C\u2665\r"
