@@ -49,11 +49,17 @@ namespace EarthIsMine.Object
 
         private IEnumerator ChangeSpriteCoroutine(int index)
         {
-            Color nextSprite = _sprites[index].color;
+            SpriteRenderer nextSprite = _sprites[index];
+            if (currentSprite == nextSprite)
+            {
+                yield break;
+            }
+            currentSprite.sortingOrder = -1;
+            nextSprite.sortingOrder = -2;
             _sprites[index].gameObject.SetActive(true);
-            nextSprite.a = 1;
+            nextSprite.color = new Color(1, 1, 1, 1);
             float time = 0;
-            _sprites[index].color = nextSprite;
+            _sprites[index] = nextSprite;
             while (true)
             {
                 yield return null;
