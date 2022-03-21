@@ -6,9 +6,9 @@ namespace EarthIsMine.Manager
     public class EnemyManager : ObjectManager<EnemyManager, Enemy, EnemyTypes>
     {
         [SerializeField]
-        private int _destroyPositionY = -5;
+        private float _destroyPositionY = -5;
 
-        public int DestroyPositionY => _destroyPositionY;
+        public float DestroyPositionY => _destroyPositionY;
 
         public Enemy Spawn(EnemyTypes enemyType, Vector3 position)
         {

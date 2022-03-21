@@ -141,8 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b24806407f3d94bb72a30cc261f656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 4
-  <ClampPosition>k__BackingField: {x: 3.5, y: 4}
+  <Speed>k__BackingField: 6
+  <ClampPosition>k__BackingField: {x: 4.5, y: 6.5}
 --- !u!114 &6676435383820118451
 MonoBehaviour:
   m_ObjectHideFlags: 0

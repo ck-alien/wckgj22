@@ -9,9 +9,9 @@ namespace EarthIsMine.Manager
     public class ProjectileManager : ObjectManager<ProjectileManager, Projectile, ProjectileTypes>
     {
         [SerializeField]
-        private int _destroyPositionY = 6;
+        private float _destroyPositionY = 6;
 
-        public int DestroyPositionY => _destroyPositionY;
+        public float DestroyPositionY => _destroyPositionY;
 
         public void Create(ProjectileTypes projectileType, Vector3 position, int count)
         {
