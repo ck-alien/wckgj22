@@ -35,6 +35,7 @@ namespace EarthIsMine.Game
         private BackGroundController[] _backgrounds;
 
         private StageInfo _stage;
+        private IDisposable _pauseCheck;
 
         private void Start()
         {
@@ -85,6 +86,12 @@ namespace EarthIsMine.Game
             {
                 _stage.BGMInstance.start();
             }
+
+            if (_pauseCheck is not null)
+            {
+                _pauseCheck.Dispose();
+            }
+            _pauseCheck = GameManager.Instance.IsPaused.Subscribe(paused => _stage.BGMInstance.setPaused(paused));
 
             var wait = UniTask.Delay(1000).ToObservable().ToYieldInstruction();
             while (!wait.IsDone)
@@ -141,6 +148,13 @@ namespace EarthIsMine.Game
             {
                 _stage.BGMInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             }
+
+            if (_pauseCheck is not null)
+            {
+                _pauseCheck.Dispose();
+                _pauseCheck = null;
+            }
+
             yield break;
         }
     }
