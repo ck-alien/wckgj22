@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using EarthIsMine.Data;
 using EarthIsMine.FSM;
 using EarthIsMine.Manager;
+using EarthIsMine.Object;
 using UniRx;
 using UnityEngine;
 
