@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 044758c9b7b3d1b48a4e80106053ad02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultLife: 3
+  <Data>k__BackingField: {fileID: 11400000, guid: 43e2a1ac3c7641245a49f8618c8c972d, type: 2}
 --- !u!114 &8295806584940757805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b10e538cadd14145bbf0c0ba18ad001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _invincibleTime: 0.3
   _spriteCount: 3
   _hitSound:
     Guid:
@@ -164,6 +163,7 @@ MonoBehaviour:
       Data3: -1626372949
       Data4: -1134111177
     Path: event:/HitSFX2D
+  <InvincibleTime>k__BackingField: 0
 --- !u!114 &6533616610547837664
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1526,6 +1526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948e77415946946449c27f3687c3555e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Data>k__BackingField: {fileID: 11400000, guid: 61ff2791568b91e48a2fd6dbbca51e7f, type: 2}
   <Game>k__BackingField: {fileID: 1025101618}
   <Player>k__BackingField: {fileID: 4182384883787286611}
 --- !u!4 &1961685642

@@ -107,6 +107,7 @@ namespace EarthIsMine.Game
             var waves = _stage.StageData.Waves;
             foreach (var wave in waves)
             {
+                print("Start Wave");
                 SpawnEnemies(wave.SpawnPattern);
 
                 do

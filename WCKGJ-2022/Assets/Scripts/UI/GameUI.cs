@@ -20,6 +20,8 @@ namespace EarthIsMine.UI
 
         private readonly Queue<GameObject> _life = new();
 
+        private int _score;
+        private int _displayScore;
 
         protected override void Awake()
         {
@@ -34,7 +36,18 @@ namespace EarthIsMine.UI
                 .Subscribe(_ => GameManager.Instance.IsPaused.Value = true);
 
             GameManager.Instance.Player.Life.Subscribe(life => SetLifeBar(life));
-            GameManager.Instance.Score.Subscribe(score => _scoreText.text = FormatScoreText(score));
+            GameManager.Instance.Score.Subscribe(score => _score = score);
+        }
+
+        private void Update()
+        {
+            var score = Mathf.CeilToInt(Mathf.Lerp(_displayScore, _score, Time.deltaTime));
+
+            if (score != _displayScore)
+            {
+                _displayScore = score;
+                _scoreText.text = FormatScoreText(_displayScore);
+            }
         }
 
         private void SetLifeBar(int maxLife)

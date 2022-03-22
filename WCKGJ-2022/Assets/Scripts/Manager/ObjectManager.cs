@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using EarthIsMine.Object;
 using EarthIsMine.Pool;
 using UnityEngine;
@@ -30,12 +31,15 @@ namespace EarthIsMine.Manager
         {
             get
             {
-                var count = 0;
-                foreach (var item in _pools.Values)
+                var countAll = 0;
+                foreach (var item in _pools)
                 {
-                    count += item.CountActive;
+                    var count = item.Value.PoolItems.Count(go => go.activeSelf);
+                    countAll += count;
+                    // print($"{item.Key}: Count={count}");
                 }
-                return count;
+                // print(countAll);
+                return countAll;
             }
         }
 

@@ -6,9 +6,7 @@ namespace EarthIsMine.Pool
 {
     public interface IReadonlyGameObjectPool
     {
-        int CountAll { get; }
-        int CountActive { get; }
-        int CountInactive { get; }
+        IReadOnlyCollection<GameObject> PoolItems { get; }
     }
 
     public interface IGameObjectPool : IReadonlyGameObjectPool
@@ -20,9 +18,7 @@ namespace EarthIsMine.Pool
 
     public class GameObjectPool : IGameObjectPool, IDisposable
     {
-        public int CountAll => _items.Count;
-        public int CountActive => _items.Count - CountInactive;
-        public int CountInactive { get; private set; }
+        public IReadOnlyCollection<GameObject> PoolItems => _items;
 
         private readonly GameObject _prefab;
         private readonly List<GameObject> _items;
@@ -39,7 +35,6 @@ namespace EarthIsMine.Pool
             {
                 if (!item.activeSelf)
                 {
-                    CountInactive--;
                     item.SetActive(true);
                     return item;
                 }
@@ -58,15 +53,8 @@ namespace EarthIsMine.Pool
 
         public void Release(GameObject item)
         {
-            foreach (var check in _items)
-            {
-                if (item == check)
-                {
-                    item.SetActive(false);
-                    CountInactive++;
-                    return;
-                }
-            }
+            item.SetActive(false);
+            return;
         }
 
         public void Clear()

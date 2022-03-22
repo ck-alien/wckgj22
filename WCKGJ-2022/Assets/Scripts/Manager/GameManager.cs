@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using EarthIsMine.Data;
 using EarthIsMine.Game;
 using EarthIsMine.Object;
 using UniRx;
@@ -15,6 +16,9 @@ namespace EarthIsMine.Manager
 
     public class GameManager : Singleton<GameManager>
     {
+        [field: SerializeField]
+        public GameData Data { get; private set; }
+
         [field: SerializeField]
         public GameStateMachine Game { get; private set; }
 
@@ -44,7 +48,7 @@ namespace EarthIsMine.Manager
 
             Player.Life.Where(life => life < 1).Subscribe(_ =>
             {
-                print("game over");
+                print("Game Over");
                 IsGameOver.Value = true;
                 Game.ChangeState(typeof(DeadState));
             });
@@ -76,7 +80,7 @@ namespace EarthIsMine.Manager
 
         private IEnumerator AutoScoring(IObserver<int> observer)
         {
-            float deltaTime = 0f;
+            float time = 0f;
 
             while (true)
             {
@@ -85,12 +89,11 @@ namespace EarthIsMine.Manager
                     yield break;
                 }
 
-                deltaTime += Time.deltaTime;
-                if (deltaTime >= 10.0f)
+                time += Time.deltaTime;
+                if (time >= Data.TimeScoreInterval)
                 {
-                    var integerPart = Mathf.Floor(deltaTime);
-                    deltaTime -= integerPart;
-                    observer.OnNext(50);
+                    observer.OnNext(Data.TimeScore);
+                    time = 0f;
                 }
                 yield return null;
             }
