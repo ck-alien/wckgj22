@@ -66,6 +66,12 @@ namespace EarthIsMine.Object
             Controller.enabled = false;
             Attack.enabled = false;
 
+            ParticleManager.Instance.Play("player-destroy", transform.position);
+            if (!Data.DestroySound.IsNull)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot(Data.DestroySound);
+            }
+
             gameObject.SetActive(false);
         }
     }
