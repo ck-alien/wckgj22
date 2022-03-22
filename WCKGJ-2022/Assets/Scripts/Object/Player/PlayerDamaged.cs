@@ -7,9 +7,10 @@ namespace EarthIsMine.Object
 {
     public class PlayerDamaged : MonoBehaviour
     {
-        [SerializeField] private float _invincibleTime;
         [SerializeField] private int _spriteCount;
         [SerializeField] private FMODUnity.EventReference _hitSound;
+
+        public float InvincibleTime { get; set; }
 
         private SpriteRenderer _spriteRenderer;
 
@@ -52,7 +53,7 @@ namespace EarthIsMine.Object
             while (count < _spriteCount * 2)
             {
                 yield return null;
-                time += Time.deltaTime / (_invincibleTime / _spriteCount / 2);
+                time += Time.deltaTime / (InvincibleTime / _spriteCount / 2);
                 fadeColor.g = Mathf.Lerp(start, end, time);
                 fadeColor.b = Mathf.Lerp(start, end, time);
                 _spriteRenderer.color = fadeColor;

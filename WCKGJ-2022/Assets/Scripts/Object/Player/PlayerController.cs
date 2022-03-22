@@ -5,7 +5,6 @@ namespace EarthIsMine.Object
 {
     public class PlayerController : MonoBehaviour
     {
-        [field: SerializeField]
         public float Speed { get; set; } = 3f;
 
         [field: SerializeField]

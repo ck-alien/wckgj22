@@ -1,3 +1,4 @@
+using EarthIsMine.Data;
 using EarthIsMine.Manager;
 using UniRx;
 using UnityEngine;
@@ -9,8 +10,8 @@ namespace EarthIsMine.Object
     [RequireComponent(typeof(PlayerDamaged))]
     public class Player : MonoBehaviour
     {
-        [SerializeField]
-        private int _defaultLife = 3;
+        [field: SerializeField]
+        public PlayerData Data { get; private set; }
 
         public ReactiveProperty<int> Life { get; set; }
 
@@ -24,7 +25,10 @@ namespace EarthIsMine.Object
             Attack = GetComponent<PlayerAttack>();
             Damaged = GetComponent<PlayerDamaged>();
 
-            Life = new ReactiveProperty<int>(_defaultLife);
+            Controller.Speed = Data.MoveSpeed;
+            Life = new ReactiveProperty<int>(Data.DefaultLife);
+            Damaged.InvincibleTime = Data.InvincibleTime;
+            Attack.Interval = Data.ShotInterval;
         }
 
         private void Start()

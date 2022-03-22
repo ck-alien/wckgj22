@@ -26,7 +26,7 @@ namespace EarthIsMine.Object
 
         private void Start()
         {
-            GetComponent<ObjectMove>().Speed = Data.Speed;
+            GetComponent<ObjectMove>().Speed = GameManager.Instance.Player.Data.MoveSpeed;
         }
 
         private void OnEnable()

@@ -15,11 +15,9 @@ namespace EarthIsMine.Object
         [field: SerializeField]
         public ProjectileTypes ProjectileType { get; set; }
 
-        [field: SerializeField]
-        public int ShotCount { get; set; }
+        public int ShotCount { get; set; } = 1;
 
-        [field: SerializeField]
-        public float Interval { get; set; }
+        public float Interval { get; set; } = 0.5f;
 
         private float _elapsedTime;
 

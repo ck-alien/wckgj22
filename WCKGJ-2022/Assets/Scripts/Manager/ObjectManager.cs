@@ -27,29 +27,19 @@ namespace EarthIsMine.Manager
 
         protected IDictionary<ItemTypesT, IGameObjectPool> Pools => _pools;
 
-        public ItemT[] AllActiveObjects
-        {
-            get
-            {
-                var list = new List<ItemT>();
-                foreach (var pool in _pools.Values)
-                {
-                    list.AddRange(pool.ActiveObjects.Select(go => go.GetComponent<ItemT>()));
-                }
-                return list.ToArray();
-            }
-        }
-
         public int ActiveObjectsCount
         {
             get
             {
-                var count = 0;
-                foreach (var item in _pools.Values)
+                var countAll = 0;
+                foreach (var item in _pools)
                 {
-                    count += item.ActiveObjects.Count;
+                    var count = item.Value.PoolItems.Count(go => go.activeSelf);
+                    countAll += count;
+                    // print($"{item.Key}: Count={count}");
                 }
-                return count;
+                // print(countAll);
+                return countAll;
             }
         }
 
