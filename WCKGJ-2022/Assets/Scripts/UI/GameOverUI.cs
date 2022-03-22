@@ -17,6 +17,9 @@ namespace EarthIsMine.UI
         private ResultMessageData _resultMessageData;
 
         [SerializeField]
+        private Image _alienImage;
+
+        [SerializeField]
         private TextMeshProUGUI _resultText;
 
         [SerializeField]
