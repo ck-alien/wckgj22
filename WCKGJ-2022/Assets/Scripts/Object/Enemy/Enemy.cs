@@ -78,7 +78,9 @@ namespace EarthIsMine.Object
 
             if (!_passed && transform.position.y <= EnemyManager.Instance.DestroyPositionY)
             {
-                MainThreadDispatcher.StartUpdateMicroCoroutine(Pass(3f));
+                Observable.FromMicroCoroutine(() => Pass(3f))
+                    .Subscribe()
+                    .AddTo(gameObject);
             }
         }
 
@@ -101,6 +103,7 @@ namespace EarthIsMine.Object
 
         public void Kill()
         {
+            ParticleManager.Instance.Play("enemy-destroy", transform.position);
             if (!Data.DestroySound.IsNull)
             {
                 FMODUnity.RuntimeManager.PlayOneShot(Data.DestroySound, transform.position);
@@ -124,7 +127,7 @@ namespace EarthIsMine.Object
                 yield return null;
             }
 
-            if (gameObject.TryGetComponent<ReturnToPool>(out var component))
+            if (gameObject && gameObject.TryGetComponent<ReturnToPool>(out var component))
             {
                 component.Return();
             }

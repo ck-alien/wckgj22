@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -60785457
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 887cc75d29fcdb34fb159ffdd129fe02, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -125,13 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33811e1e9da8b784f97f9f8c7e10ed0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shotSound:
-    Guid:
-      Data1: 700598835
-      Data2: 1099862831
-      Data3: -983027529
-      Data4: -704774919
-    Path: event:/ShotSFX2D
   <Data>k__BackingField: {fileID: 11400000, guid: 8e813f18616d74e43b72d2af3eb25e7f, type: 2}
 --- !u!114 &1482322877545819613
 MonoBehaviour:

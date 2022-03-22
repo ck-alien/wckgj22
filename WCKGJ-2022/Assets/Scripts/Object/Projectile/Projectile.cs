@@ -10,7 +10,7 @@ namespace EarthIsMine.Object
     {
         public ProjectileTypes Type { get; }
 
-        public void Remove();
+        public void Remove(bool showEffect);
     }
 
     [RequireComponent(typeof(ObjectMove))]
@@ -35,7 +35,7 @@ namespace EarthIsMine.Object
         {
             if (transform.position.y >= ProjectileManager.Instance.DestroyPositionY)
             {
-                Remove();
+                Remove(false);
             }
         }
 
@@ -43,12 +43,16 @@ namespace EarthIsMine.Object
         {
             if (other.CompareTag("Enemy"))
             {
-                Remove();
+                Remove(true);
             }
         }
 
-        public void Remove()
+        public void Remove(bool showEffect = true)
         {
+            if (showEffect)
+            {
+                ParticleManager.Instance.Play("projectile-hit", transform.position);
+            }
             if (gameObject.TryGetComponent<ReturnToPool>(out var component))
             {
                 component.Return();
