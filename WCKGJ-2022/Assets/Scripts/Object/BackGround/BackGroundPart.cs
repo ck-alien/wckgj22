@@ -1,31 +1,42 @@
-using System.Collections;
 using UnityEngine;
 
 namespace EarthIsMine.Object
 {
     public class BackGroundPart : MonoBehaviour
     {
-        private Transform _tr;
-
-        [SerializeField] private Vector3 _startPos;
-
         [SerializeField] private float _limitY;
 
+        private Vector3 _startPos;
 
-        [SerializeField] private SpriteRenderer[] _sprites;
-        private SpriteRenderer _currentSprite;
+        // [SerializeField] private SpriteRenderer[] _sprites;
 
+        // private SpriteRenderer _currentSprite;
+
+        /*
         private void Awake()
         {
-            _tr = GetComponent<Transform>();
             _sprites = GetComponentsInChildren<SpriteRenderer>();
             _currentSprite = _sprites[0];
         }
+        */
 
         private void Start()
         {
-            Default();
+            _startPos = transform.position;
+        }
 
+        private void Update()
+        {
+            if (transform.position.y <= _limitY)
+            {
+                transform.position = _startPos;
+            }
+        }
+
+        /*
+        private void Start()
+        {
+            Default();
         }
 
         private void Default()
@@ -38,7 +49,9 @@ namespace EarthIsMine.Object
                 }
             }
         }
+        */
 
+        /*
         public void ChangeSprite(Day currentTime)
         {
             StartCoroutine(ChangeSpriteCoroutine((int)currentTime));
@@ -77,16 +90,6 @@ namespace EarthIsMine.Object
 
             yield return null;
         }
-
-        private void Update()
-        {
-            if (_tr.position.y < _limitY)
-            {
-                _tr.position = _startPos;
-            }
-        }
-
-
-
+        */
     }
 }

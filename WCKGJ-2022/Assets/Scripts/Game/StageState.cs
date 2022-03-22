@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using EarthIsMine.Data;
 using EarthIsMine.FSM;
 using EarthIsMine.Manager;
 using EarthIsMine.Object;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace EarthIsMine.Game
 {
@@ -33,6 +35,9 @@ namespace EarthIsMine.Game
 
         [SerializeField]
         private BackGroundController[] _backgrounds;
+
+        [SerializeField]
+        private Light2D _light;
 
         private StageInfo _stage;
         private IDisposable _pauseCheck;
@@ -67,19 +72,32 @@ namespace EarthIsMine.Game
             Debug.Assert(_stage is not null, $"{gameStateMachine.StageType}에 맞는 웨이브 데이터가 없습니다.");
 
             Debug.Log($"{gameStateMachine.StageType} Stage Start");
+
+            switch (gameStateMachine.StageType)
+            {
+                case StageTypes.Day:
+                    DOTween.To(() => _light.color, c => _light.color = c, Color.white, 2f);
+                    break;
+                case StageTypes.Night:
+                    DOTween.To(() => _light.color, c => _light.color = c, Color.gray, 2f);
+                    break;
+                default:
+                    break;
+            }
+
             if (gameStateMachine.StageType == StageTypes.Night)
             {
-                for (int i = 0; i < _backgrounds.Length; i++)
-                {
-                    _backgrounds[i].ChangeSprite(Day.Night);
-                }
+                //for (int i = 0; i < _backgrounds.Length; i++)
+                //{
+                //    _backgrounds[i].ChangeSprite(Day.Night);
+                //}
             }
             else
             {
-                for (int i = 0; i < _backgrounds.Length; i++)
-                {
-                    _backgrounds[i].ChangeSprite(Day.DayTime);
-                }
+                //for (int i = 0; i < _backgrounds.Length; i++)
+                //{
+                //    _backgrounds[i].ChangeSprite(Day.DayTime);
+                //}
             }
 
             if (_stage.BGMInstance.isValid())
