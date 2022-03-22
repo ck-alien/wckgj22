@@ -2,20 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EarthIsMine
+namespace EarthIsMine.UI
 {
-    public class CreditUI : MonoBehaviour
+    public class CreditUI : Presenter
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
     }
 }
