@@ -18,7 +18,7 @@ namespace EarthIsMine.Game
         public StageTypes Type { get; private set; }
 
         [field: SerializeField]
-        public StageWaveData StageData { get; private set; }
+        public StageData StageData { get; private set; }
 
         [field: SerializeField]
         public FMODUnity.EventReference BGM { get; private set; }
@@ -105,9 +105,12 @@ namespace EarthIsMine.Game
             var gameStateMachine = stateMachine as GameStateMachine;
 
             var waves = _stage.StageData.Waves;
-            foreach (var wave in waves)
+
+            for (int i = 0; i < waves.Length; i++)
             {
-                print("Start Wave");
+                var wave = waves[i];
+                Debug.Log($"Start Wave [{i}]");
+
                 SpawnEnemies(wave.SpawnPattern);
 
                 do
@@ -127,7 +130,7 @@ namespace EarthIsMine.Game
                 _ => StageTypes.Day
             };
 
-            void SpawnEnemies(EnemyPatternDataItem[] patterns)
+            void SpawnEnemies(WavePattern[] patterns)
             {
                 var spawnPosition = gameStateMachine.EnemySpawnPosition;
                 var distance = gameStateMachine.EnemySpawnDistance;

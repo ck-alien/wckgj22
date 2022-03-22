@@ -12,5 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf251b818421b34ea5e392ad80b0724, type: 3}
   m_Name: Projectile_Default_Data
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 5
-  <Damage>k__BackingField: 1
+  _speed: 20
+  _damage: 1
+  _shotSound:
+    Guid:
+      Data1: 700598835
+      Data2: 1099862831
+      Data3: -983027529
+      Data4: -704774919
+    Path: event:/SFX/ProjectileShotSFX

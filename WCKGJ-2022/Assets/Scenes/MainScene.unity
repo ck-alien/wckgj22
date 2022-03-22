@@ -130,62 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2047807028}
     m_Modifications:
-    - target: {fileID: 3828444918965798891, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3828444918965798891, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3828444918965798891, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3828444918965798891, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3828444918965798891, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Play
-      objectReference: {fileID: 0}
-    - target: {fileID: 3828444918965798891, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FMODUnity.StudioEventEmitter, FMODUnity
-      objectReference: {fileID: 0}
-    - target: {fileID: 3828444918965798891, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5081223653470990070, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5081223653470990070, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5081223653470990070, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5081223653470990070, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5081223653470990070, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Play
-      objectReference: {fileID: 0}
-    - target: {fileID: 5081223653470990070, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FMODUnity.StudioEventEmitter, FMODUnity
-      objectReference: {fileID: 0}
-    - target: {fileID: 5081223653470990070, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 7575961888649091600, guid: 73c587d871f487447a651c0b9c9d636a, type: 3}
       propertyPath: m_Name
       value: Title UI
@@ -520,7 +464,7 @@ MonoBehaviour:
       Data2: 1184820486
       Data3: -1765385027
       Data4: -1818286895
-    Path: event:/MainBGM
+    Path: event:/BGM/MainBGM
   Event: 
   PlayEvent: 1
   StopEvent: 2

@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace EarthIsMine.Object
 {
     public class BackGroundPart : MonoBehaviour
     {
-        private Transform tr;
+        private Transform _tr;
 
         [SerializeField] private Vector3 _startPos;
 
@@ -14,14 +13,13 @@ namespace EarthIsMine.Object
 
 
         [SerializeField] private SpriteRenderer[] _sprites;
-
-        SpriteRenderer currentSprite;
+        private SpriteRenderer _currentSprite;
 
         private void Awake()
         {
-            tr = GetComponent<Transform>();
+            _tr = GetComponent<Transform>();
             _sprites = GetComponentsInChildren<SpriteRenderer>();
-            currentSprite = _sprites[0];
+            _currentSprite = _sprites[0];
         }
 
         private void Start()
@@ -34,7 +32,7 @@ namespace EarthIsMine.Object
         {
             for (int i = 0; i < _sprites.Length; i++)
             {
-                if (currentSprite != _sprites[i])
+                if (_currentSprite != _sprites[i])
                 {
                     _sprites[i].gameObject.SetActive(false);
                 }
@@ -50,11 +48,11 @@ namespace EarthIsMine.Object
         private IEnumerator ChangeSpriteCoroutine(int index)
         {
             SpriteRenderer nextSprite = _sprites[index];
-            if (currentSprite == nextSprite)
+            if (_currentSprite == nextSprite)
             {
                 yield break;
             }
-            currentSprite.sortingOrder = -1;
+            _currentSprite.sortingOrder = -1;
             nextSprite.sortingOrder = -2;
             _sprites[index].gameObject.SetActive(true);
             nextSprite.color = new Color(1, 1, 1, 1);
@@ -63,28 +61,28 @@ namespace EarthIsMine.Object
             while (true)
             {
                 yield return null;
-                Color tmp = currentSprite.color;
+                Color tmp = _currentSprite.color;
                 time += Time.deltaTime;
                 tmp.a = Mathf.Lerp(1, 0, time);
-                currentSprite.color = tmp;
-                if (currentSprite.color.a == 0)
+                _currentSprite.color = tmp;
+                if (_currentSprite.color.a == 0)
                 {
-                    currentSprite.gameObject.SetActive(false);
-                    currentSprite = _sprites[index];
+                    _currentSprite.gameObject.SetActive(false);
+                    _currentSprite = _sprites[index];
                     break;
                 }
             }
 
-            currentSprite = _sprites[index];
+            _currentSprite = _sprites[index];
 
             yield return null;
         }
 
         private void Update()
         {
-            if (tr.position.y < _limitY)
+            if (_tr.position.y < _limitY)
             {
-                tr.position = _startPos;
+                _tr.position = _startPos;
             }
         }
 

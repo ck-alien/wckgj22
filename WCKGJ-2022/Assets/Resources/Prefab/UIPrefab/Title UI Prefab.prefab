@@ -276,7 +276,7 @@ MonoBehaviour:
       Data2: 1240697343
       Data3: -1912732022
       Data4: -1845499777
-    Path: event:/ClickUISFX
+    Path: event:/UI SFX/ClickUISFX
 --- !u!1 &5585367212515246419
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +665,7 @@ MonoBehaviour:
       Data2: 1240697343
       Data3: -1912732022
       Data4: -1845499777
-    Path: event:/ClickUISFX
+    Path: event:/UI SFX/ClickUISFX
 --- !u!1 &8883197731074645770
 GameObject:
   m_ObjectHideFlags: 0

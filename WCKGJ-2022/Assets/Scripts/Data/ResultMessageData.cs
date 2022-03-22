@@ -6,17 +6,22 @@ namespace EarthIsMine.Data
     [Serializable]
     public class ResultMessage
     {
-        [field: SerializeField]
-        public int Score { get; private set; }
+        [SerializeField, Tooltip("해당 점수 이상 획득 시 메시지가 출력됩니다.")]
+        private int _score;
 
-        [field: SerializeField, Multiline]
-        public string Message { get; private set; }
+        [SerializeField, Tooltip("출력할 메시지")]
+        private string _message;
+
+        public int Score => _score;
+        public string Message => _message;
     }
 
     [CreateAssetMenu(fileName = "ResultMessageData", menuName = "Data/ResultMessageData")]
     public class ResultMessageData : ScriptableObject
     {
-        [field: SerializeField]
-        public ResultMessage[] Messages { get; private set; }
+        [SerializeField, Tooltip("메시지 목록")]
+        private ResultMessage[] _messages;
+
+        public ResultMessage[] Messages => _messages;
     }
 }

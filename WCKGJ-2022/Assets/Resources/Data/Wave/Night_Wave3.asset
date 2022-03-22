@@ -12,22 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce323564410f1644aacb088fa81a309, type: 3}
   m_Name: Night_Wave3
   m_EditorClassIdentifier: 
-  <SpawnPattern>k__BackingField:
-  - <EnemyType>k__BackingField: 1
-    <RelativePosition>k__BackingField: {x: 2, y: 0}
-  - <EnemyType>k__BackingField: 0
-    <RelativePosition>k__BackingField: {x: 1, y: 1}
-  - <EnemyType>k__BackingField: 0
-    <RelativePosition>k__BackingField: {x: 3, y: 1}
-  - <EnemyType>k__BackingField: 1
-    <RelativePosition>k__BackingField: {x: 0, y: 2}
-  - <EnemyType>k__BackingField: 2
-    <RelativePosition>k__BackingField: {x: 2, y: 2}
-  - <EnemyType>k__BackingField: 1
-    <RelativePosition>k__BackingField: {x: 4, y: 2}
-  - <EnemyType>k__BackingField: 0
-    <RelativePosition>k__BackingField: {x: 1, y: 3}
-  - <EnemyType>k__BackingField: 0
-    <RelativePosition>k__BackingField: {x: 3, y: 3}
-  - <EnemyType>k__BackingField: 0
-    <RelativePosition>k__BackingField: {x: 2, y: 4}
+  _spawnPattern:
+  - _enemyType: 1
+    _relativePosition: {x: 2, y: 0}
+  - _enemyType: 0
+    _relativePosition: {x: 1, y: 1}
+  - _enemyType: 0
+    _relativePosition: {x: 3, y: 1}
+  - _enemyType: 1
+    _relativePosition: {x: 0, y: 2.5}
+  - _enemyType: 2
+    _relativePosition: {x: 2, y: 2.5}
+  - _enemyType: 1
+    _relativePosition: {x: 4, y: 2.5}
+  - _enemyType: 0
+    _relativePosition: {x: 1, y: 3.5}
+  - _enemyType: 0
+    _relativePosition: {x: 3, y: 3.5}
+  - _enemyType: 0
+    _relativePosition: {x: 2, y: 4.5}

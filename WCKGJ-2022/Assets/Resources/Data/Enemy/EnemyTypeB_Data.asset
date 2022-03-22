@@ -12,6 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87bdf333b1c0c6242ad28c5d13c84942, type: 3}
   m_Name: EnemyTypeB_Data
   m_EditorClassIdentifier: 
-  <Life>k__BackingField: 10
-  <Speed>k__BackingField: 1
-  <Score>k__BackingField: 10
+  _life: 30
+  _speed: 1
+  _score: 30
+  _hitSound:
+    Guid:
+      Data1: -1261713168
+      Data2: 1146969867
+      Data3: -2129236570
+      Data4: 1282200327
+    Path: event:/SFX/EnemyHitSFX
+  _destroySound:
+    Guid:
+      Data1: 1843719456
+      Data2: 1206267160
+      Data3: 298748047
+      Data4: 1407837599
+    Path: event:/SFX/EnemyDestroySFX

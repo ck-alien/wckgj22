@@ -13,27 +13,27 @@ namespace EarthIsMine.Object
         [field: SerializeField]
         public float Speed { get; set; }
 
-        private BackGroundPart[] parts;
+        private BackGroundPart[] _parts;
 
-        private Transform tr;
+        private Transform _tr;
 
         private void Awake()
         {
-            tr = GetComponent<Transform>();
-            parts = GetComponentsInChildren<BackGroundPart>();
+            _tr = GetComponent<Transform>();
+            _parts = GetComponentsInChildren<BackGroundPart>();
         }
 
         public void ChangeSprite(Day time)
         {
-            for (int i = 0; i < parts.Length; i++)
+            for (int i = 0; i < _parts.Length; i++)
             {
-                parts[i].ChangeSprite(time);
+                _parts[i].ChangeSprite(time);
             }
         }
 
         private void Update()
         {
-            tr.position += new Vector3(0, Speed, 0) * Time.deltaTime;
+            _tr.position += new Vector3(0, Speed, 0) * Time.deltaTime;
         }
 
 

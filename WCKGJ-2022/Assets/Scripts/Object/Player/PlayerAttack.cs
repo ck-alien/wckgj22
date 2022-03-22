@@ -6,7 +6,7 @@ namespace EarthIsMine.Object
     /// <summary>
     /// 플레이어의 공격을 담당하는 클래스이다. 직접적인 공격 호출과 쿨타임을 계산하는 역할을 한다.
     /// </summary>
-    public class PlayerAttack : MonoBehaviour
+    public class PlayerAttack : PlayerBehaviour
     {
         [SerializeField]
         [Tooltip("발사체가 시작하는 위치를 나타낸다.")]
@@ -14,10 +14,6 @@ namespace EarthIsMine.Object
 
         [field: SerializeField]
         public ProjectileTypes ProjectileType { get; set; }
-
-        public int ShotCount { get; set; } = 1;
-
-        public float Interval { get; set; } = 0.5f;
 
         private float _elapsedTime;
 
@@ -29,9 +25,9 @@ namespace EarthIsMine.Object
         private void Update()
         {
             _elapsedTime += Time.deltaTime;
-            if (_elapsedTime >= Interval)
+            if (_elapsedTime >= Parent.Data.ShotInterval)
             {
-                ProjectileManager.Instance.Create(ProjectileType, _startPos.position, ShotCount);
+                ProjectileManager.Instance.Create(ProjectileType, _startPos.position, Parent.Data.ShotCount);
                 _elapsedTime = 0f;
             }
         }

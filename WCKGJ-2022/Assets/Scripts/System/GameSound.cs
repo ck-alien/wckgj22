@@ -7,10 +7,10 @@ namespace EarthIsMine.System
 {
     public sealed class GameSound : Singleton<GameSound>
     {
-        public const string MasterVolumePrefKey = "master-volume";
-        public const string BGMVolumePrefKey = "bgm-volume";
-        public const string SFXVolumePrefKey = "sfx-volume";
-        public const string UISFXVolumePrefKey = "uisfx-volume";
+        public const string MasterVolumePrefKey = "mastervolume";
+        public const string BGMVolumePrefKey = "bgmvolume";
+        public const string SFXVolumePrefKey = "sfxvolume";
+        public const string UISFXVolumePrefKey = "uisfxvolume";
 
         [field: SerializeField, InspectorName("Master Volume"), Range(0f, 1f)]
         public static float MasterVolume { get; set; }

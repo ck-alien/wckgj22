@@ -16,24 +16,18 @@ namespace EarthIsMine.Object
     [RequireComponent(typeof(ObjectMove))]
     public abstract class Projectile : MonoBehaviour, IProjectile
     {
-        [SerializeField]
-        private FMODUnity.EventReference _shotSound;
-
         [field: SerializeField]
         public ProjectileData Data { get; private set; }
 
         public abstract ProjectileTypes Type { get; }
 
-        private void Start()
-        {
-            GetComponent<ObjectMove>().Speed = GameManager.Instance.Player.Data.MoveSpeed;
-        }
-
         private void OnEnable()
         {
-            if (!_shotSound.IsNull)
+            GetComponent<ObjectMove>().Speed = Data.Speed;
+
+            if (!Data.ShotSound.IsNull)
             {
-                FMODUnity.RuntimeManager.PlayOneShot(_shotSound);
+                FMODUnity.RuntimeManager.PlayOneShot(Data.ShotSound);
             }
         }
 

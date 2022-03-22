@@ -5,16 +5,14 @@ using UnityEngine;
 
 namespace EarthIsMine.Object
 {
-    public class PlayerDamaged : MonoBehaviour
+    public class PlayerDamaged : PlayerBehaviour
     {
-        [SerializeField] private int _spriteCount;
-        [SerializeField] private FMODUnity.EventReference _hitSound;
-
-        public float InvincibleTime { get; set; }
-
-        private SpriteRenderer _spriteRenderer;
+        [SerializeField]
+        private int _spriteCount;
 
         public bool IsInvincible { get; set; }
+
+        private SpriteRenderer _spriteRenderer;
 
         private void Awake()
         {
@@ -28,9 +26,9 @@ namespace EarthIsMine.Object
                 return;
             }
 
-            if (!_hitSound.IsNull)
+            if (Parent.Data.HitSound.IsNull)
             {
-                FMODUnity.RuntimeManager.PlayOneShot(_hitSound);
+                FMODUnity.RuntimeManager.PlayOneShot(Parent.Data.HitSound);
             }
 
             Camera.main.DOShakePosition(0.2f, strength: 0.5f);
@@ -53,7 +51,7 @@ namespace EarthIsMine.Object
             while (count < _spriteCount * 2)
             {
                 yield return null;
-                time += Time.deltaTime / (InvincibleTime / _spriteCount / 2);
+                time += Time.deltaTime / (Parent.Data.InvincibleTime / _spriteCount / 2);
                 fadeColor.g = Mathf.Lerp(start, end, time);
                 fadeColor.b = Mathf.Lerp(start, end, time);
                 _spriteRenderer.color = fadeColor;

@@ -12,7 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ee37eeb32a8bc4fb4ead9fb509ac14, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  <MoveSpeed>k__BackingField: 6
-  <DefaultLife>k__BackingField: 3
-  <InvincibleTime>k__BackingField: 0.5
-  <ShotInterval>k__BackingField: 0.1
+  _moveSpeed: 6
+  _defaultLife: 3
+  _invincibleTime: 0.5
+  _shotCount: 1
+  _shotInterval: 0.1
+  _hitSound:
+    Guid:
+      Data1: -2105180694
+      Data2: 1097950655
+      Data3: -2001892959
+      Data4: 1471334621
+    Path: event:/SFX/PlayerHitSFX
+  _destroySound:
+    Guid:
+      Data1: 1351521607
+      Data2: 1325343712
+      Data3: -923993948
+      Data4: -1886898772
+    Path: event:/SFX/PlayerDestorySFX

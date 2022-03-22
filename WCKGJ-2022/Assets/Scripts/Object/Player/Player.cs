@@ -22,13 +22,15 @@ namespace EarthIsMine.Object
         private void Awake()
         {
             Controller = GetComponent<PlayerController>();
-            Attack = GetComponent<PlayerAttack>();
-            Damaged = GetComponent<PlayerDamaged>();
+            Controller.Parent = this;
 
-            Controller.Speed = Data.MoveSpeed;
+            Attack = GetComponent<PlayerAttack>();
+            Attack.Parent = this;
+
+            Damaged = GetComponent<PlayerDamaged>();
+            Damaged.Parent = this;
+
             Life = new ReactiveProperty<int>(Data.DefaultLife);
-            Damaged.InvincibleTime = Data.InvincibleTime;
-            Attack.Interval = Data.ShotInterval;
         }
 
         private void Start()
@@ -55,8 +57,8 @@ namespace EarthIsMine.Object
                 return;
             }
 
-            Life.Value -= 1;
             Damaged.OnHit();
+            Life.Value -= 1;
         }
 
         private void OnDead()

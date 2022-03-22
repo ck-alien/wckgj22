@@ -5,13 +5,25 @@ namespace EarthIsMine.Data
     [CreateAssetMenu(fileName = "EnemyData", menuName = "Data/EnemyData")]
     public class EnemyData : ScriptableObject
     {
-        [field: SerializeField]
-        public int Life { get; private set; }
+        [SerializeField, Tooltip("체력")]
+        private int _life = 10;
 
-        [field: SerializeField]
-        public float Speed { get; private set; }
+        [SerializeField, Tooltip("이동 속도")]
+        private float _speed = 1f;
 
-        [field: SerializeField]
-        public int Score { get; private set; }
+        [SerializeField, Tooltip("처치 시 점수")]
+        private int _score = 1;
+
+        [SerializeField, Tooltip("피격 효과음")]
+        private FMODUnity.EventReference _hitSound;
+
+        [SerializeField, Tooltip("파괴 효과음")]
+        private FMODUnity.EventReference _destroySound;
+
+        public int Life => _life;
+        public float Speed => _speed;
+        public int Score => _score;
+        public FMODUnity.EventReference HitSound => _hitSound;
+        public FMODUnity.EventReference DestroySound => _destroySound;
     }
 }

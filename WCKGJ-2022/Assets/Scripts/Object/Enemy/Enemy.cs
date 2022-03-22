@@ -1,6 +1,8 @@
+using System.Collections;
 using EarthIsMine.Data;
 using EarthIsMine.Manager;
 using EarthIsMine.Pool;
+using UniRx;
 using UnityEngine;
 
 namespace EarthIsMine.Object
@@ -21,18 +23,25 @@ namespace EarthIsMine.Object
 
         public abstract EnemyTypes Type { get; }
 
+        /// <summary>
+        /// 이 프로퍼티로 체력을 수정하면 Hit로 취급하여 각종 효과들이 발생합니다.
+        /// </summary>
         public int Life
         {
             get => _life;
             set
             {
-                // Debug.Log(_life);
                 _life = Mathf.Max(0, value);
                 if (_life == 0)
                 {
                     Kill();
                     GameManager.Instance.Score.Value += Data.Score;
                     return;
+                }
+
+                if (!Data.DestroySound.IsNull)
+                {
+                    FMODUnity.RuntimeManager.PlayOneShot(Data.HitSound, transform.position);
                 }
                 _hit = true;
             }
@@ -41,6 +50,7 @@ namespace EarthIsMine.Object
         private SpriteRenderer _renderer;
         private int _life;
         private bool _hit;
+        private bool _passed = false;
 
         private void Start()
         {
@@ -50,7 +60,8 @@ namespace EarthIsMine.Object
 
         private void OnEnable()
         {
-            Life = Data.Life;
+            _life = Data.Life;
+            _passed = false;
         }
 
         protected virtual void Update()
@@ -65,28 +76,54 @@ namespace EarthIsMine.Object
                 _renderer.color = Color.white;
             }
 
-            if (transform.position.y <= EnemyManager.Instance.DestroyPositionY)
+            if (!_passed && transform.position.y <= EnemyManager.Instance.DestroyPositionY)
             {
-                Kill();
-                GameManager.Instance.Player.Hit(ignoreInvincible: true);
+                MainThreadDispatcher.StartUpdateMicroCoroutine(Pass(3f));
             }
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D other)
         {
+            if (_passed)
+            {
+                return;
+            }
+
             if (other.CompareTag("Player"))
             {
                 Kill();
             }
             else if (other.CompareTag("Projectile"))
             {
-                var projectile = other.GetComponent<Projectile>();
-                Life -= projectile.Data.Damage;
+                Life -= other.GetComponent<Projectile>().Data.Damage;
             }
         }
 
         public void Kill()
         {
+            if (!Data.DestroySound.IsNull)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot(Data.DestroySound, transform.position);
+            }
+
+            if (gameObject.TryGetComponent<ReturnToPool>(out var component))
+            {
+                component.Return();
+            }
+        }
+
+        private IEnumerator Pass(float destroyDelay = 3f)
+        {
+            _passed = true;
+            GameManager.Instance.Player.Hit(ignoreInvincible: true);
+
+            var time = 0f;
+            while (time < destroyDelay)
+            {
+                time += Time.deltaTime;
+                yield return null;
+            }
+
             if (gameObject.TryGetComponent<ReturnToPool>(out var component))
             {
                 component.Return();
