@@ -32,14 +32,19 @@ namespace EarthIsMine.Object
                 {
                     Kill();
                     GameManager.Instance.Score.Value += Data.Score;
+                    return;
                 }
+                _hit = true;
             }
         }
 
+        private SpriteRenderer _renderer;
         private int _life;
+        private bool _hit;
 
         private void Start()
         {
+            _renderer = GetComponent<SpriteRenderer>();
             GetComponent<ObjectMove>().Speed = Data.Speed;
         }
 
@@ -50,6 +55,16 @@ namespace EarthIsMine.Object
 
         protected virtual void Update()
         {
+            if (_hit)
+            {
+                _renderer.color = Color.red;
+                _hit = false;
+            }
+            else
+            {
+                _renderer.color = Color.white;
+            }
+
             if (transform.position.y <= EnemyManager.Instance.DestroyPositionY)
             {
                 Kill();
