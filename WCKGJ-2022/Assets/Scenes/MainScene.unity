@@ -1620,6 +1620,13 @@ MonoBehaviour:
     <WaitTime>k__BackingField: 0.5
     <Duration>k__BackingField: 0.5
     <EaseType>k__BackingField: 24
+  - <Target>k__BackingField: {fileID: 1517701398}
+    <DoFade>k__BackingField: 1
+    <StartPosition>k__BackingField: {x: 30, y: 0}
+    <StartScale>k__BackingField: {x: 1, y: 1}
+    <WaitTime>k__BackingField: 0.5
+    <Duration>k__BackingField: 0.5
+    <EaseType>k__BackingField: 24
 --- !u!114 &2775446683213248143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1756,7 +1763,7 @@ MonoBehaviour:
   <IsDefault>k__BackingField: 0
   _startButton: {fileID: 3828444918850000224}
   _settingButton: {fileID: 5081223653352045693}
-  _credtiButton: {fileID: 0}
+  _credtiButton: {fileID: 1517701400}
 --- !u!222 &3339943104280530287
 CanvasRenderer:
   m_ObjectHideFlags: 0

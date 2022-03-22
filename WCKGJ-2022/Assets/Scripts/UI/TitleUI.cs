@@ -37,7 +37,8 @@ namespace EarthIsMine.UI
 
             _credtiButton.OnClickAsObservable().Subscribe(_ =>
             {
-                UIManager.Instance.Show<CreditUI>();
+                CanvasGroup.interactable = false;
+                SceneLoader.Instance.Load("CreditScene");
             });
         }
     }
