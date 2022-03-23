@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace EarthIsMine.UI
 {
@@ -14,16 +13,36 @@ namespace EarthIsMine.UI
         [SerializeField]
         private float _durableTime;
 
-
-
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
-            StartCoroutine(Show());
-
+            base.Awake();
         }
 
+        private void OnEnable()
+        {
+            StartCoroutine(Show());
+            if (GameInput.Instance)
+            {
+                GameInput.Instance.ActionMaps.Game.Pause.performed += OnClose;
+            }
+        }
 
+        private void OnDisable()
+        {
+            StopCoroutine(Show());
+            if (GameInput.Instance)
+            {
+                GameInput.Instance.ActionMaps.Game.Pause.performed -= OnClose;
+            }
+        }
+
+        private void OnClose(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                SceneLoader.Instance.Load("MainScene");
+            }
+        }
 
         private IEnumerator Show()
         {
@@ -56,6 +75,7 @@ namespace EarthIsMine.UI
                     yield return null;
                 }
             }
+            SceneLoader.Instance.Load("MainScene");
         }
     }
 }
