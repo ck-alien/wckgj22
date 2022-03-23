@@ -57,9 +57,6 @@
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{51e3b361-5f34-4042-9177-e82de3cb995d}">
-		<property name="minimumDistance">
-			<value>15</value>
-		</property>
 		<property name="maximumDistance">
 			<value>10000</value>
 		</property>
@@ -133,9 +130,6 @@
 	<object class="MixerBusPanner" id="{5c66ea7c-6dd9-4e77-a072-a6c8e6beb736}" />
 	<object class="MixerBusFader" id="{42beb066-98bc-4c8d-b3d9-ba830f2ae0f8}" />
 	<object class="SpatialiserEffect" id="{1012e166-f50e-47e0-aaab-5c5c6495cc1c}">
-		<property name="minimumDistance">
-			<value>15</value>
-		</property>
 		<property name="maximumDistance">
 			<value>10000</value>
 		</property>
