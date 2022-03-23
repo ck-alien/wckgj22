@@ -15,7 +15,7 @@ namespace EarthIsMine.UI
         private Button _settingButton;
 
         [SerializeField]
-        private Button _credtiButton;
+        private Button _creditButton;
 
         protected override void Awake()
         {
@@ -35,7 +35,7 @@ namespace EarthIsMine.UI
             _settingButton.OnClickAsObservable()
                 .Subscribe(_ => UIManager.Instance.Show<SettingUI>());
 
-            _credtiButton.OnClickAsObservable().Subscribe(_ =>
+            _creditButton.OnClickAsObservable().Subscribe(_ =>
             {
                 CanvasGroup.interactable = false;
                 SceneLoader.Instance.Load("CreditScene");
