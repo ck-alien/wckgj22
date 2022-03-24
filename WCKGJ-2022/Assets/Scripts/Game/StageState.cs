@@ -39,6 +39,9 @@ namespace EarthIsMine.Game
         [SerializeField]
         private Light2D _light;
 
+        [SerializeField]
+        private UnityEngine.Rendering.Volume _nightVolume;
+
         private StageInfo _stage;
         private IDisposable _pauseCheck;
 
@@ -76,9 +79,11 @@ namespace EarthIsMine.Game
             switch (gameStateMachine.StageType)
             {
                 case StageTypes.Day:
+                    DOTween.To(() => _nightVolume.weight, w => _nightVolume.weight = w, 0f, 2f);
                     DOTween.To(() => _light.color, c => _light.color = c, Color.white, 2f);
                     break;
                 case StageTypes.Night:
+                    DOTween.To(() => _nightVolume.weight, w => _nightVolume.weight = w, 1f, 2f);
                     DOTween.To(() => _light.color, c => _light.color = c, Color.gray, 2f);
                     break;
                 default:
