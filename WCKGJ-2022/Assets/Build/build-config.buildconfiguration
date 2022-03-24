@@ -14,15 +14,15 @@
             "SceneInfos": [
                 {
                     "Scene": "GlobalObjectId_V1-1-8c9cfa26abfee488c85f1582747f6a02-102900000-0",
-                    "AutoLoad": true
+                    "AutoLoad": false
                 },
                 {
                     "Scene": "GlobalObjectId_V1-1-1cdc1982587e0714ea8aa14b39812329-102900000-0",
-                    "AutoLoad": true
+                    "AutoLoad": false
                 },
                 {
                     "Scene": "GlobalObjectId_V1-1-c1c38fa376916a64c851adf2724093db-102900000-0",
-                    "AutoLoad": true
+                    "AutoLoad": false
                 }
             ]
         }
